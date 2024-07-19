@@ -1,4 +1,4 @@
-annotations_MCC <- function(SNPs_est,SNPs_GT){
+MCC_annotations <- function(SNPs_est,SNPs_GT){
   
   MCCs = c()
   L = length(SNPs_GT)
