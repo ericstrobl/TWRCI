@@ -9,8 +9,6 @@ The Experiments folder contains any additional code needed to replicate the expe
 # Installation
 > if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")
 
-> BiocManager::install(c("fgsea","qvalue","org.Hs.eg.db","reactome.db"))
-
 > library(devtools)
 
 > install_github("ericstrobl/TWRCI")
