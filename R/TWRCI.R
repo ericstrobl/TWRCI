@@ -1,20 +1,49 @@
-TWRCI <- function(genes_d,SNPs_d,target_d,nuisance_d,batches){
+TWRCI <- function(genes_d,SNPs_d,target_d,nuisance_d,batches,
+                 graph=FALSE,CRCEs = FALSE){
   # genes_d = gene expression data
   # SNPs_d = variant data
   # target_d = phenotype data
   # nuisance_d = nuisance variable data
   # batches = batches
+  # graph (T/F) = whether to estimate causal graph
+  # CRCEs (T/F) = whether to estimate the conditional root causal effects (CRCEs) of the inferred causes of the phenotype
   
   require(earth)
   
   SNPs_d = normalizeData(SNPs_d)
   genes_d = normalizeData(genes_d)
   target_d = normalizeData(target_d)
+  nuisance_d = normalizeData(nuisance_d)
   batches = normalizeData(batches)
   
   DL = DirectLiNGAM_SG_11_no_ss2(genes_d,SNPs_d,target_d,nuisance_d,batches)
+
+  p = ncol(genes_d)+1
+  if (graph){
+    suffStat = list(); suffStat$batches = normalizeData(cbind(nuisance_d,batches)); 
+    suffStat$data = cbind(genes_d,target_d); 
+    suffStat$SNP_data = SNPs_d
+
+    skel = my_skeleton_p(suffStat, p, SNPs=DL$SNPs, alpha=0.05)
+    G_est = skel$G
+    for (k in seq_len(p)){
+      G_est[DL$K[k],DL$K[seq_len(k-1)]]=FALSE
+    }
+    G_est = screen_anc_Y(suffStat, G_est, SNPs=DL$SNPs,alpha=0.05,root=FALSE)
+  } else{
+    G_est = NULL
+  }
+
+  if (CRCEs){
+    iS = isAncAll(G_est,1:(p-1),p)
+    mm = estimate_CRCEs(genes_d,batches,G_est,DL$SNPs,SNPs_d,target_d,iS)
+    CRCEs = mm$CRCE
+  } else{
+    iS = NULL
+    CRCEs = NULL
+  }
   
-  return(list(K = DL$K, SNPs = DL$SNPs))
+  return(list(K = DL$K, SNPs = DL$SNPs, G_est = G_est, CRCEs = CRCEs, anc = iS)
 }
 
 DirectLiNGAM_SG_11_no_ss2 <- function(genes_d,SNPs_d,target_d,nuisance_d,batches){
