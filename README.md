@@ -4,7 +4,7 @@ This is an R package implementing the TWRCI algorithm for discovering root causa
 
 The academic article describing TWRCI in detail can be found [here](https://www.google.com). Please cite the article if you use any of the code in this repository.
 
-The Experiments folder contains any additional code needed to replicate the experimental results in the paper. All code was tested in R version 4.3.1.
+The Experiments folder contains any additional code needed to replicate the experimental results in the paper after downloading GTEx V8 protected access data and lifting over to hg19 with BCFtools. All code was tested in R version 4.3.1 and BCFtools version 1.18.
 
 # Installation
 > if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")
