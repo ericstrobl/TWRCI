@@ -5,7 +5,7 @@ Version: 0.1.0
 Author: Eric V. Strobl
 Maintainer: Eric V. Strobl <eric.strobl@pitt.edu>
 Description: Annotates, reconstructs and estimates the conditional root causal effects of gene expression levels given individual-level data with variants, gene expression from the relevant tissue and the phenotype.
-Depends: uwot, pcalg, earth, fastcluster, ieugwasr, qvalue, Rfast, independence, gtools, RANN, MASS, glmnet, momenthchi2, biomaRt, FNN, Matrix, coloc
+Depends: uwot, pcalg, earth, fastcluster, ieugwasr, qvalue, Rfast, independence, gtools, RANN, MASS, glmnet, momentchi2, biomaRt, FNN, Matrix, coloc
 License: CC BY-NC-SA 4.0
 Encoding: UTF-8
 LazyData: true
