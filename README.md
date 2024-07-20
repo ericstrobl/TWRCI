@@ -16,3 +16,27 @@ The Experiments folder contains any additional code needed to replicate the expe
 > install_github("ericstrobl/TWRCI")
 
 > library(TWRCI)
+
+# Run TWRCI on synthetic data
+> nsamps = 500 # ensure 500 samples for the variant-expression-phenotype data
+
+> datat = matrix(rnorm(nsamps*100),nsamps,100) # instantiate 100 instrumental variables
+
+> p = 30 # 29 gene expression levels and the phenotype
+
+> SNPs = generate_SNP_list(p,ncol(data)/p) # assign SNPs to each gene
+
+> G = generate_DAG(p,SNPs$SNPs,bulk_nbatch=1) # generate DAG
+
+> RNAseq = sample_data(G,SNPs$SNPs,datat,p=p,nsamps=nsamps) # generate linked RNA-seq and phenotype data
+
+> out = TWRCI(RNAseq$X,RNAseq$SNP_data,RNAseq$Y,RNAseq$batch) # run TWRCI
+
+> print(out$K) # print causal order
+
+> print(out$SNPs) # print annotations
+
+> print(out$G_est) # print causal graph
+
+> print(out$CRCEs) # print CRCE estimates 
+
