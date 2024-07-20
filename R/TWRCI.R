@@ -43,7 +43,7 @@ TWRCI <- function(genes_d,SNPs_d,target_d,nuisance_d,batches,
     CRCEs = NULL
   }
   
-  return(list(K = DL$K, SNPs = DL$SNPs, G_est = G_est, CRCEs = CRCEs, anc = iS)
+  return(list(K = DL$K, SNPs = DL$SNPs, G_est = G_est, CRCEs = CRCEs, anc = iS))
 }
 
 DirectLiNGAM_SG_11_no_ss2 <- function(genes_d,SNPs_d,target_d,nuisance_d,batches){
