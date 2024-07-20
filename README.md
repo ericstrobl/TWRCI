@@ -20,13 +20,13 @@ Set the number of samples of the variant-expression-phenotype data to 500:
 
 > nsamps = 500
 
-Instantiate 100 instrumental variables:
+Instantiate 30 instrumental variables:
 
-> datat = matrix(rnorm(nsamps*100),nsamps,100)
+> datat = matrix(rnorm(nsamps*30),nsamps,30)
 
-Set the number of gene expression levels plus the phenotype to 30:
+Set the number of gene expression levels plus the phenotype to 10:
 
-> p = 30 
+> p = 10 
 
 Assign SNPs to each gene:
 
