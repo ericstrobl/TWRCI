@@ -136,12 +136,12 @@ for (i in 51:100){
   Yte = normalizeData(cbind(RNAseq_te$X,RNAseq_te$Y))
   Bte = as.matrix(RNAseq_te$batch)
   
-  TWRCI_res[[i]]$acc_annot_order = MACR_annot_graph(G_est,aa$SNPs,X,Y,B,Xte,Yte,Bte)
-  locs_res[[i]]$acc_annot_order = MACR_annot_graph(G_est,ng_1,X,Y,B,Xte,Yte,Bte)
-  cis_res[[i]]$acc_annot_order = MACR_annot_graph(G_est,cis,X,Y,B,Xte,Yte,Bte)
-  cis_eQTLs_res[[i]]$acc_annot_order = MACR_annot_graph(G_est,cis_eQTLs,X,Y,B,Xte,Yte,Bte)
-  coloc_ABF_res[[i]]$acc_annot_order = MACR_annot_graph(G_est,CL,X,Y,B,Xte,Yte,Bte)
-  coloc_susie_res[[i]]$acc_annot_order = MACR_annot_graph(G_est,CL_susie,X,Y,B,Xte,Yte,Bte)
+  TWRCI_res[[i]]$MACR_annot_graph = MACR_annot_graph(G_est,aa$SNPs,X,Y,B,Xte,Yte,Bte)
+  locs_res[[i]]$MACR_annot_graph = MACR_annot_graph(G_est,ng_1,X,Y,B,Xte,Yte,Bte)
+  cis_res[[i]]$MACR_annot_graph = MACR_annot_graph(G_est,cis,X,Y,B,Xte,Yte,Bte)
+  cis_eQTLs_res[[i]]$MACR_annot_graph = MACR_annot_graph(G_est,cis_eQTLs,X,Y,B,Xte,Yte,Bte)
+  coloc_ABF_res[[i]]$MACR_annot_graph = MACR_annot_graph(G_est,CL,X,Y,B,Xte,Yte,Bte)
+  coloc_susie_res[[i]]$MACR_annot_graph = MACR_annot_graph(G_est,CL_susie,X,Y,B,Xte,Yte,Bte)
   
   Yg = normalizeData(RNAseq$X)
   Yy = normalizeData(RNAseq$Y)
@@ -157,12 +157,12 @@ for (i in 51:100){
   coloc_ABF_res[[i]]$MSE_CRCE = MSE_CRCE(G_est,CL,X,Yg,B,Yy,Xte,Ygte,Bte,truth)
   coloc_susie_res[[i]]$MSE_CRCE = MSE_CRCE(G_est,CL_susie,X,Yg,B,Yy,Xte,Ygte,Bte,truth)
   
-  TWRCI_res[[i]]$acc_CRCE_order = MACR_CRCE(G_est,aa$SNPs,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  locs_res[[i]]$acc_CRCE_order = MACR_CRCE(G_est,ng_1,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  cis_res[[i]]$acc_CRCE_order = MACR_CRCE(G_est,cis,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  cis_eQTLs_res[[i]]$acc_CRCE_order = MACR_CRCE(G_est,cis_eQTLs,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  coloc_ABF_res[[i]]$acc_CRCE_order = MACR_CRCE(G_est,CL,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  coloc_susie_res[[i]]$acc_CRCE_order = MACR_CRCE(G_est,CL_susie,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  TWRCI_res[[i]]$MACR_CRCE = MACR_CRCE(G_est,aa$SNPs,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  locs_res[[i]]$MACR_CRCE = MACR_CRCE(G_est,ng_1,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  cis_res[[i]]$MACR_CRCE = MACR_CRCE(G_est,cis,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  cis_eQTLs_res[[i]]$MACR_CRCE = MACR_CRCE(G_est,cis_eQTLs,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  coloc_ABF_res[[i]]$MACR_CRCE = MACR_CRCE(G_est,CL,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  coloc_susie_res[[i]]$MACR_CRCE = MACR_CRCE(G_est,CL_susie,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
   
   # SIGNET
   ## get graph for SIGNET below
@@ -189,12 +189,12 @@ for (i in 51:100){
   SIGNET_res[[i]]$SHD = sum(G_est!=G$graph)
   SIGNET_res[[i]]$MCC_graph = graph_MCC(G$graph>0,G_est)
   
-  TWRCI_res[[i]]$acc_annot_order_SIGNET = MACR_annot_graph(G_est,aa$SNPs,X,Y,B,Xte,Yte,Bte)
-  locs_res[[i]]$acc_annot_order_SIGNET = MACR_annot_graph(G_est,ng_1,X,Y,B,Xte,Yte,Bte)
-  cis_res[[i]]$acc_annot_order_SIGNET = MACR_annot_graph(G_est,cis,X,Y,B,Xte,Yte,Bte)
-  cis_eQTLs_res[[i]]$acc_annot_order_SIGNET = MACR_annot_graph(G_est,cis_eQTLs,X,Y,B,Xte,Yte,Bte)
-  coloc_ABF_res[[i]]$acc_annot_order_SIGNET = MACR_annot_graph(G_est,CL,X,Y,B,Xte,Yte,Bte)
-  coloc_susie_res[[i]]$acc_annot_order_SIGNET = MACR_annot_graph(G_est,CL_susie,X,Y,B,Xte,Yte,Bte)
+  TWRCI_res[[i]]$MACR_annot_graph_SIGNET = MACR_annot_graph(G_est,aa$SNPs,X,Y,B,Xte,Yte,Bte)
+  locs_res[[i]]$MACR_annot_graph_SIGNET = MACR_annot_graph(G_est,ng_1,X,Y,B,Xte,Yte,Bte)
+  cis_res[[i]]$MACR_annot_graph_SIGNET = MACR_annot_graph(G_est,cis,X,Y,B,Xte,Yte,Bte)
+  cis_eQTLs_res[[i]]$MACR_annot_graph_SIGNET = MACR_annot_graph(G_est,cis_eQTLs,X,Y,B,Xte,Yte,Bte)
+  coloc_ABF_res[[i]]$MACR_annot_graph_SIGNET = MACR_annot_graph(G_est,CL,X,Y,B,Xte,Yte,Bte)
+  coloc_susie_res[[i]]$MACR_annot_graph_SIGNET = MACR_annot_graph(G_est,CL_susie,X,Y,B,Xte,Yte,Bte)
   
   TWRCI_res[[i]]$MSE_CRCE_SIGNET = MSE_CRCE(G_est,SNPs$SNPs,X,Yg,B,Yy,Xte,Ygte,Bte,truth)
   locs_res[[i]]$MSE_CRCE_SIGNET = MSE_CRCE(G_est,ng_1,X,Yg,B,Yy,Xte,Ygte,Bte,truth)
@@ -203,12 +203,12 @@ for (i in 51:100){
   coloc_ABF_res[[i]]$MSE_CRCE_SIGNET = MSE_CRCE(G_est,CL,X,Yg,B,Yy,Xte,Ygte,Bte,truth)
   coloc_susie_res[[i]]$MSE_CRCE_SIGNET = MSE_CRCE(G_est,CL_susie,X,Yg,B,Yy,Xte,Ygte,Bte,truth)
   
-  TWRCI_res[[i]]$acc_CRCE_order_SIGNET = MACR_CRCE(G_est,aa$SNPs,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  locs_res[[i]]$acc_CRCE_order_SIGNET = MACR_CRCE(G_est,ng_1,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  cis_res[[i]]$acc_CRCE_order_SIGNET = MACR_CRCE(G_est,cis,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  cis_eQTLs_res[[i]]$acc_CRCE_order_SIGNET = MACR_CRCE(G_est,cis_eQTLs,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  coloc_ABF_res[[i]]$acc_CRCE_order_SIGNET = MACR_CRCE(G_est,CL,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  coloc_susie_res[[i]]$acc_CRCE_order_SIGNET = MACR_CRCE(G_est,CL_susie,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  TWRCI_res[[i]]$MACR_CRCE_SIGNET = MACR_CRCE(G_est,aa$SNPs,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  locs_res[[i]]$MACR_CRCE_SIGNET = MACR_CRCE(G_est,ng_1,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  cis_res[[i]]$MACR_CRCE_SIGNET = MACR_CRCE(G_est,cis,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  cis_eQTLs_res[[i]]$MACR_CRCE_SIGNET = MACR_CRCE(G_est,cis_eQTLs,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  coloc_ABF_res[[i]]$MACR_CRCE_SIGNET = MACR_CRCE(G_est,CL,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  coloc_susie_res[[i]]$MACR_CRCE_SIGNET = MACR_CRCE(G_est,CL_susie,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
   
   
   ## get graph for RCI, GRCI and PC below
@@ -236,12 +236,12 @@ for (i in 51:100){
   RCI_res[[i]]$SHD = sum(G_est!=G$graph)
   RCI_res[[i]]$MCC_graph = graph_MCC(G$graph>0,G_est)
   
-  TWRCI_res[[i]]$acc_annot_order_RCI = MACR_annot_graph(G_est,aa$SNPs,X,Y,B,Xte,Yte,Bte)
-  locs_res[[i]]$acc_annot_order_RCI = MACR_annot_graph(G_est,ng_1,X,Y,B,Xte,Yte,Bte)
-  cis_res[[i]]$acc_annot_order_RCI = MACR_annot_graph(G_est,cis,X,Y,B,Xte,Yte,Bte)
-  cis_eQTLs_res[[i]]$acc_annot_order_RCI = MACR_annot_graph(G_est,cis_eQTLs,X,Y,B,Xte,Yte,Bte)
-  coloc_ABF_res[[i]]$acc_annot_order_RCI = MACR_annot_graph(G_est,CL,X,Y,B,Xte,Yte,Bte)
-  coloc_susie_res[[i]]$acc_annot_order_RCI = MACR_annot_graph(G_est,CL_susie,X,Y,B,Xte,Yte,Bte)
+  TWRCI_res[[i]]$MACR_annot_graph_RCI = MACR_annot_graph(G_est,aa$SNPs,X,Y,B,Xte,Yte,Bte)
+  locs_res[[i]]$MACR_annot_graph_RCI = MACR_annot_graph(G_est,ng_1,X,Y,B,Xte,Yte,Bte)
+  cis_res[[i]]$MACR_annot_graph_RCI = MACR_annot_graph(G_est,cis,X,Y,B,Xte,Yte,Bte)
+  cis_eQTLs_res[[i]]$MACR_annot_graph_RCI = MACR_annot_graph(G_est,cis_eQTLs,X,Y,B,Xte,Yte,Bte)
+  coloc_ABF_res[[i]]$MACR_annot_graph_RCI = MACR_annot_graph(G_est,CL,X,Y,B,Xte,Yte,Bte)
+  coloc_susie_res[[i]]$MACR_annot_graph_RCI = MACR_annot_graph(G_est,CL_susie,X,Y,B,Xte,Yte,Bte)
   
   TWRCI_res[[i]]$MSE_CRCE_RCI = MSE_CRCE(G_est,aa$SNPs,X,Yg,B,Yy,Xte,Ygte,Bte,truth)
   locs_res[[i]]$MSE_CRCE_RCI = MSE_CRCE(G_est,ng_1,X,Yg,B,Yy,Xte,Ygte,Bte,truth)
@@ -250,12 +250,12 @@ for (i in 51:100){
   coloc_ABF_res[[i]]$MSE_CRCE_RCI = MSE_CRCE(G_est,CL,X,Yg,B,Yy,Xte,Ygte,Bte,truth)
   coloc_susie_res[[i]]$MSE_CRCE_RCI = MSE_CRCE(G_est,CL_susie,X,Yg,B,Yy,Xte,Ygte,Bte,truth)
   
-  TWRCI_res[[i]]$acc_CRCE_order_RCI = MACR_CRCE(G_est,aa$SNPs,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  locs_res[[i]]$acc_CRCE_order_RCI = MACR_CRCE(G_est,ng_1,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  cis_res[[i]]$acc_CRCE_order_RCI = MACR_CRCE(G_est,cis,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  cis_eQTLs_res[[i]]$acc_CRCE_order_RCI = MACR_CRCE(G_est,cis_eQTLs,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  coloc_ABF_res[[i]]$acc_CRCE_order_RCI = MACR_CRCE(G_est,CL,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  coloc_susie_res[[i]]$acc_CRCE_order_RCI = MACR_CRCE(G_est,CL_susie,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  TWRCI_res[[i]]$MACR_CRCE_RCI = MACR_CRCE(G_est,aa$SNPs,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  locs_res[[i]]$MACR_CRCE_RCI = MACR_CRCE(G_est,ng_1,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  cis_res[[i]]$MACR_CRCE_RCI = MACR_CRCE(G_est,cis,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  cis_eQTLs_res[[i]]$MACR_CRCE_RCI = MACR_CRCE(G_est,cis_eQTLs,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  coloc_ABF_res[[i]]$MACR_CRCE_RCI = MACR_CRCE(G_est,CL,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  coloc_susie_res[[i]]$MACR_CRCE_RCI = MACR_CRCE(G_est,CL_susie,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
   
   
   # GRCI
@@ -274,12 +274,12 @@ for (i in 51:100){
   GRCI_res[[i]]$SHD = sum(G_est!=G$graph) 
   GRCI_res[[i]]$MCC_graph = graph_MCC(G$graph>0,G_est)
   
-  TWRCI_res[[i]]$acc_annot_order_GRCI = MACR_annot_graph(G_est,aa$SNPs,X,Y,B,Xte,Yte,Bte)
-  locs_res[[i]]$acc_annot_order_GRCI = MACR_annot_graph(G_est,ng_1,X,Y,B,Xte,Yte,Bte)
-  cis_res[[i]]$acc_annot_order_GRCI = MACR_annot_graph(G_est,cis,X,Y,B,Xte,Yte,Bte)
-  cis_eQTLs_res[[i]]$acc_annot_order_GRCI = MACR_annot_graph(G_est,cis_eQTLs,X,Y,B,Xte,Yte,Bte)
-  coloc_ABF_res[[i]]$acc_annot_order_GRCI = MACR_annot_graph(G_est,CL,X,Y,B,Xte,Yte,Bte)
-  coloc_susie_res[[i]]$acc_annot_order_GRCI = MACR_annot_graph(G_est,CL_susie,X,Y,B,Xte,Yte,Bte)
+  TWRCI_res[[i]]$MACR_annot_graph_GRCI = MACR_annot_graph(G_est,aa$SNPs,X,Y,B,Xte,Yte,Bte)
+  locs_res[[i]]$MACR_annot_graph_GRCI = MACR_annot_graph(G_est,ng_1,X,Y,B,Xte,Yte,Bte)
+  cis_res[[i]]$MACR_annot_graph_GRCI = MACR_annot_graph(G_est,cis,X,Y,B,Xte,Yte,Bte)
+  cis_eQTLs_res[[i]]$MACR_annot_graph_GRCI = MACR_annot_graph(G_est,cis_eQTLs,X,Y,B,Xte,Yte,Bte)
+  coloc_ABF_res[[i]]$MACR_annot_graph_GRCI = MACR_annot_graph(G_est,CL,X,Y,B,Xte,Yte,Bte)
+  coloc_susie_res[[i]]$MACR_annot_graph_GRCI = MACR_annot_graph(G_est,CL_susie,X,Y,B,Xte,Yte,Bte)
   
   TWRCI_res[[i]]$MSE_CRCE_GRCI = MSE_CRCE(G_est,aa$SNPs,X,Yg,B,Yy,Xte,Ygte,Bte,truth)
   locs_res[[i]]$MSE_CRCE_GRCI = MSE_CRCE(G_est,ng_1,X,Yg,B,Yy,Xte,Ygte,Bte,truth)
@@ -288,12 +288,12 @@ for (i in 51:100){
   coloc_ABF_res[[i]]$MSE_CRCE_GRCI = MSE_CRCE(G_est,CL,X,Yg,B,Yy,Xte,Ygte,Bte,truth)
   coloc_susie_res[[i]]$MSE_CRCE_GRCI = MSE_CRCE(G_est,CL_susie,X,Yg,B,Yy,Xte,Ygte,Bte,truth)
   
-  TWRCI_res[[i]]$acc_CRCE_order_GRCI = MACR_CRCE(G_est,aa$SNPs,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  locs_res[[i]]$acc_CRCE_order_GRCI = MACR_CRCE(G_est,ng_1,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  cis_res[[i]]$acc_CRCE_order_GRCI = MACR_CRCE(G_est,cis,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  cis_eQTLs_res[[i]]$acc_CRCE_order_GRCI = MACR_CRCE(G_est,cis_eQTLs,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  coloc_ABF_res[[i]]$acc_CRCE_order_GRCI = MACR_CRCE(G_est,CL,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  coloc_susie_res[[i]]$acc_CRCE_order_GRCI = MACR_CRCE(G_est,CL_susie,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  TWRCI_res[[i]]$MACR_CRCE_GRCI = MACR_CRCE(G_est,aa$SNPs,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  locs_res[[i]]$MACR_CRCE_GRCI = MACR_CRCE(G_est,ng_1,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  cis_res[[i]]$MACR_CRCE_GRCI = MACR_CRCE(G_est,cis,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  cis_eQTLs_res[[i]]$MACR_CRCE_GRCI = MACR_CRCE(G_est,cis_eQTLs,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  coloc_ABF_res[[i]]$MACR_CRCE_GRCI = MACR_CRCE(G_est,CL,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  coloc_susie_res[[i]]$MACR_CRCE_GRCI = MACR_CRCE(G_est,CL_susie,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
   
   
   # CausalCell / PC
@@ -313,12 +313,12 @@ for (i in 51:100){
   CausalCell_res[[i]]$SHD = sum(G_est!=G$graph)
   CausalCell_res[[i]]$MCC_graph = graph_MCC(G$graph>0,G_est)
  
-  TWRCI_res[[i]]$acc_annot_order_CC = MACR_annot_graph(G_est,aa$SNPs,X,Y,B,Xte,Yte,Bte)
-  locs_res[[i]]$acc_annot_order_CC = MACR_annot_graph(G_est,ng_1,X,Y,B,Xte,Yte,Bte)
-  cis_res[[i]]$acc_annot_order_CC = MACR_annot_graph(G_est,cis,X,Y,B,Xte,Yte,Bte)
-  cis_eQTLs_res[[i]]$acc_annot_order_CC = MACR_annot_graph(G_est,cis_eQTLs,X,Y,B,Xte,Yte,Bte)
-  coloc_ABF_res[[i]]$acc_annot_order_CC = MACR_annot_graph(G_est,CL,X,Y,B,Xte,Yte,Bte)
-  coloc_susie_res[[i]]$acc_annot_order_CC = MACR_annot_graph(G_est,CL_susie,X,Y,B,Xte,Yte,Bte)
+  TWRCI_res[[i]]$MACR_annot_graph_CC = MACR_annot_graph(G_est,aa$SNPs,X,Y,B,Xte,Yte,Bte)
+  locs_res[[i]]$MACR_annot_graph_CC = MACR_annot_graph(G_est,ng_1,X,Y,B,Xte,Yte,Bte)
+  cis_res[[i]]$MACR_annot_graph_CC = MACR_annot_graph(G_est,cis,X,Y,B,Xte,Yte,Bte)
+  cis_eQTLs_res[[i]]$MACR_annot_graph_CC = MACR_annot_graph(G_est,cis_eQTLs,X,Y,B,Xte,Yte,Bte)
+  coloc_ABF_res[[i]]$MACR_annot_graph_CC = MACR_annot_graph(G_est,CL,X,Y,B,Xte,Yte,Bte)
+  coloc_susie_res[[i]]$MACR_annot_graph_CC = MACR_annot_graph(G_est,CL_susie,X,Y,B,Xte,Yte,Bte)
   
   TWRCI_res[[i]]$MSE_CRCE_CC = MSE_CRCE(G_est,aa$SNPs,X,Yg,B,Yy,Xte,Ygte,Bte,truth)
   locs_res[[i]]$MSE_CRCE_CC = MSE_CRCE(G_est,ng_1,X,Yg,B,Yy,Xte,Ygte,Bte,truth)
@@ -327,12 +327,12 @@ for (i in 51:100){
   coloc_ABF_res[[i]]$MSE_CRCE_CC = MSE_CRCE(G_est,CL,X,Yg,B,Yy,Xte,Ygte,Bte,truth)
   coloc_susie_res[[i]]$MSE_CRCE_CC = MSE_CRCE(G_est,CL_susie,X,Yg,B,Yy,Xte,Ygte,Bte,truth)
   
-  TWRCI_res[[i]]$acc_CRCE_order_CC = MACR_CRCE(G_est,aa$SNPs,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  locs_res[[i]]$acc_CRCE_order_CC = MACR_CRCE(G_est,ng_1,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  cis_res[[i]]$acc_CRCE_order_CC = MACR_CRCE(G_est,cis,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  cis_eQTLs_res[[i]]$acc_CRCE_order_CC = MACR_CRCE(G_est,cis_eQTLs,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  coloc_ABF_res[[i]]$acc_CRCE_order_CC = MACR_CRCE(G_est,CL,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
-  coloc_susie_res[[i]]$acc_CRCE_order_CC = MACR_CRCE(G_est,CL_susie,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  TWRCI_res[[i]]$MACR_CRCE_CC = MACR_CRCE(G_est,aa$SNPs,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  locs_res[[i]]$MACR_CRCE_CC = MACR_CRCE(G_est,ng_1,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  cis_res[[i]]$MACR_CRCE_CC = MACR_CRCE(G_est,cis,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  cis_eQTLs_res[[i]]$MACR_CRCE_CC = MACR_CRCE(G_est,cis_eQTLs,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  coloc_ABF_res[[i]]$MACR_CRCE_CC = MACR_CRCE(G_est,CL,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
+  coloc_susie_res[[i]]$MACR_CRCE_CC = MACR_CRCE(G_est,CL_susie,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
   
   save(file="Results_synth.RData", Gs, 
        TWRCI_res, locs_res, cis_res, cis_eQTLs_res, coloc_ABF_res, coloc_susie_res, 
@@ -344,40 +344,40 @@ for (i in 51:100){
 imax = 60
 res_mat = array(0,c(imax,6,5))
 for (i in 1:imax){
-  res_mat[i,1,1] = TWRCI_res[[i]]$acc_annot_order
-  res_mat[i,2,1] = locs_res[[i]]$acc_annot_order
-  res_mat[i,3,1] = cis_res[[i]]$acc_annot_order
-  res_mat[i,4,1] = cis_eQTLs_res[[i]]$acc_annot_order
-  res_mat[i,5,1] = coloc_ABF_res[[i]]$acc_annot_order
-  res_mat[i,6,1] = coloc_susie_res[[i]]$acc_annot_order
+  res_mat[i,1,1] = TWRCI_res[[i]]$MACR_annot_graph
+  res_mat[i,2,1] = locs_res[[i]]$MACR_annot_graph
+  res_mat[i,3,1] = cis_res[[i]]$MACR_annot_graph
+  res_mat[i,4,1] = cis_eQTLs_res[[i]]$MACR_annot_graph
+  res_mat[i,5,1] = coloc_ABF_res[[i]]$MACR_annot_graph
+  res_mat[i,6,1] = coloc_susie_res[[i]]$MACR_annot_graph
   
-  res_mat[i,1,2] = TWRCI_res[[i]]$acc_annot_order_SIGNET
-  res_mat[i,2,2] = locs_res[[i]]$acc_annot_order_SIGNET
-  res_mat[i,3,2] = cis_res[[i]]$acc_annot_order_SIGNET
-  res_mat[i,4,2] = cis_eQTLs_res[[i]]$acc_annot_order_SIGNET
-  res_mat[i,5,2] = coloc_ABF_res[[i]]$acc_annot_order_SIGNET
-  res_mat[i,6,2] = coloc_susie_res[[i]]$acc_annot_order_SIGNET
+  res_mat[i,1,2] = TWRCI_res[[i]]$MACR_annot_graph_SIGNET
+  res_mat[i,2,2] = locs_res[[i]]$MACR_annot_graph_SIGNET
+  res_mat[i,3,2] = cis_res[[i]]$MACR_annot_graph_SIGNET
+  res_mat[i,4,2] = cis_eQTLs_res[[i]]$MACR_annot_graph_SIGNET
+  res_mat[i,5,2] = coloc_ABF_res[[i]]$MACR_annot_graph_SIGNET
+  res_mat[i,6,2] = coloc_susie_res[[i]]$MACR_annot_graph_SIGNET
   
-  res_mat[i,1,3] = TWRCI_res[[i]]$acc_annot_order_RCI
-  res_mat[i,2,3] = locs_res[[i]]$acc_annot_order_RCI
-  res_mat[i,3,3] = cis_res[[i]]$acc_annot_order_RCI
-  res_mat[i,4,3] = cis_eQTLs_res[[i]]$acc_annot_order_RCI
-  res_mat[i,5,3] = coloc_ABF_res[[i]]$acc_annot_order_RCI
-  res_mat[i,6,3] = coloc_susie_res[[i]]$acc_annot_order_RCI
+  res_mat[i,1,3] = TWRCI_res[[i]]$MACR_annot_graph_RCI
+  res_mat[i,2,3] = locs_res[[i]]$MACR_annot_graph_RCI
+  res_mat[i,3,3] = cis_res[[i]]$MACR_annot_graph_RCI
+  res_mat[i,4,3] = cis_eQTLs_res[[i]]$MACR_annot_graph_RCI
+  res_mat[i,5,3] = coloc_ABF_res[[i]]$MACR_annot_graph_RCI
+  res_mat[i,6,3] = coloc_susie_res[[i]]$MACR_annot_graph_RCI
   
-  res_mat[i,1,4] = TWRCI_res[[i]]$acc_annot_order_GRCI
-  res_mat[i,2,4] = locs_res[[i]]$acc_annot_order_GRCI
-  res_mat[i,3,4] = cis_res[[i]]$acc_annot_order_GRCI
-  res_mat[i,4,4] = cis_eQTLs_res[[i]]$acc_annot_order_GRCI
-  res_mat[i,5,4] = coloc_ABF_res[[i]]$acc_annot_order_GRCI
-  res_mat[i,6,4] = coloc_susie_res[[i]]$acc_annot_order_GRCI
+  res_mat[i,1,4] = TWRCI_res[[i]]$MACR_annot_graph_GRCI
+  res_mat[i,2,4] = locs_res[[i]]$MACR_annot_graph_GRCI
+  res_mat[i,3,4] = cis_res[[i]]$MACR_annot_graph_GRCI
+  res_mat[i,4,4] = cis_eQTLs_res[[i]]$MACR_annot_graph_GRCI
+  res_mat[i,5,4] = coloc_ABF_res[[i]]$MACR_annot_graph_GRCI
+  res_mat[i,6,4] = coloc_susie_res[[i]]$MACR_annot_graph_GRCI
   
-  res_mat[i,1,5] = TWRCI_res[[i]]$acc_annot_order_CC
-  res_mat[i,2,5] = locs_res[[i]]$acc_annot_order_CC
-  res_mat[i,3,5] = cis_res[[i]]$acc_annot_order_CC
-  res_mat[i,4,5] = cis_eQTLs_res[[i]]$acc_annot_order_CC
-  res_mat[i,5,5] = coloc_ABF_res[[i]]$acc_annot_order_CC
-  res_mat[i,6,5] = coloc_susie_res[[i]]$acc_annot_order_CC
+  res_mat[i,1,5] = TWRCI_res[[i]]$MACR_annot_graph_CC
+  res_mat[i,2,5] = locs_res[[i]]$MACR_annot_graph_CC
+  res_mat[i,3,5] = cis_res[[i]]$MACR_annot_graph_CC
+  res_mat[i,4,5] = cis_eQTLs_res[[i]]$MACR_annot_graph_CC
+  res_mat[i,5,5] = coloc_ABF_res[[i]]$MACR_annot_graph_CC
+  res_mat[i,6,5] = coloc_susie_res[[i]]$MACR_annot_graph_CC
   
 }
 
@@ -389,40 +389,40 @@ t(apply(res_mat,c(2,3),mean))-1.96*t(apply(res_mat,c(2,3),sd))/sqrt(60)
 imax = 60
 res_mat = array(0,c(imax,6,5))
 for (i in 1:imax){
-  res_mat[i,1,1] = TWRCI_res[[i]]$acc_CRCE_order
-  res_mat[i,2,1] = locs_res[[i]]$acc_CRCE_order
-  res_mat[i,3,1] = cis_res[[i]]$acc_CRCE_order
-  res_mat[i,4,1] = cis_eQTLs_res[[i]]$acc_CRCE_order
-  res_mat[i,5,1] = coloc_ABF_res[[i]]$acc_CRCE_order
-  res_mat[i,6,1] = coloc_susie_res[[i]]$acc_CRCE_order
+  res_mat[i,1,1] = TWRCI_res[[i]]$MACR_CRCE
+  res_mat[i,2,1] = locs_res[[i]]$MACR_CRCE
+  res_mat[i,3,1] = cis_res[[i]]$MACR_CRCE
+  res_mat[i,4,1] = cis_eQTLs_res[[i]]$MACR_CRCE
+  res_mat[i,5,1] = coloc_ABF_res[[i]]$MACR_CRCE
+  res_mat[i,6,1] = coloc_susie_res[[i]]$MACR_CRCE
   
-  res_mat[i,1,2] = TWRCI_res[[i]]$acc_CRCE_order_SIGNET
-  res_mat[i,2,2] = locs_res[[i]]$acc_CRCE_order_SIGNET
-  res_mat[i,3,2] = cis_res[[i]]$acc_CRCE_order_SIGNET
-  res_mat[i,4,2] = cis_eQTLs_res[[i]]$acc_CRCE_order_SIGNET
-  res_mat[i,5,2] = coloc_ABF_res[[i]]$acc_CRCE_order_SIGNET
-  res_mat[i,6,2] = coloc_susie_res[[i]]$acc_CRCE_order_SIGNET
+  res_mat[i,1,2] = TWRCI_res[[i]]$MACR_CRCE_SIGNET
+  res_mat[i,2,2] = locs_res[[i]]$MACR_CRCE_SIGNET
+  res_mat[i,3,2] = cis_res[[i]]$MACR_CRCE_SIGNET
+  res_mat[i,4,2] = cis_eQTLs_res[[i]]$MACR_CRCE_SIGNET
+  res_mat[i,5,2] = coloc_ABF_res[[i]]$MACR_CRCE_SIGNET
+  res_mat[i,6,2] = coloc_susie_res[[i]]$MACR_CRCE_SIGNET
   
-  res_mat[i,1,3] = TWRCI_res[[i]]$acc_CRCE_order_RCI
-  res_mat[i,2,3] = locs_res[[i]]$acc_CRCE_order_RCI
-  res_mat[i,3,3] = cis_res[[i]]$acc_CRCE_order_RCI
-  res_mat[i,4,3] = cis_eQTLs_res[[i]]$acc_CRCE_order_RCI
-  res_mat[i,5,3] = coloc_ABF_res[[i]]$acc_CRCE_order_RCI
-  res_mat[i,6,3] = coloc_susie_res[[i]]$acc_CRCE_order_RCI
+  res_mat[i,1,3] = TWRCI_res[[i]]$MACR_CRCE_RCI
+  res_mat[i,2,3] = locs_res[[i]]$MACR_CRCE_RCI
+  res_mat[i,3,3] = cis_res[[i]]$MACR_CRCE_RCI
+  res_mat[i,4,3] = cis_eQTLs_res[[i]]$MACR_CRCE_RCI
+  res_mat[i,5,3] = coloc_ABF_res[[i]]$MACR_CRCE_RCI
+  res_mat[i,6,3] = coloc_susie_res[[i]]$MACR_CRCE_RCI
   
-  res_mat[i,1,4] = TWRCI_res[[i]]$acc_CRCE_order_GRCI
-  res_mat[i,2,4] = locs_res[[i]]$acc_CRCE_order_GRCI
-  res_mat[i,3,4] = cis_res[[i]]$acc_CRCE_order_GRCI
-  res_mat[i,4,4] = cis_eQTLs_res[[i]]$acc_CRCE_order_GRCI
-  res_mat[i,5,4] = coloc_ABF_res[[i]]$acc_CRCE_order_GRCI
-  res_mat[i,6,4] = coloc_susie_res[[i]]$acc_CRCE_order_GRCI
+  res_mat[i,1,4] = TWRCI_res[[i]]$MACR_CRCE_GRCI
+  res_mat[i,2,4] = locs_res[[i]]$MACR_CRCE_GRCI
+  res_mat[i,3,4] = cis_res[[i]]$MACR_CRCE_GRCI
+  res_mat[i,4,4] = cis_eQTLs_res[[i]]$MACR_CRCE_GRCI
+  res_mat[i,5,4] = coloc_ABF_res[[i]]$MACR_CRCE_GRCI
+  res_mat[i,6,4] = coloc_susie_res[[i]]$MACR_CRCE_GRCI
   
-  res_mat[i,1,5] = TWRCI_res[[i]]$acc_CRCE_order_CC
-  res_mat[i,2,5] = locs_res[[i]]$acc_CRCE_order_CC
-  res_mat[i,3,5] = cis_res[[i]]$acc_CRCE_order_CC
-  res_mat[i,4,5] = cis_eQTLs_res[[i]]$acc_CRCE_order_CC
-  res_mat[i,5,5] = coloc_ABF_res[[i]]$acc_CRCE_order_CC
-  res_mat[i,6,5] = coloc_susie_res[[i]]$acc_CRCE_order_CC
+  res_mat[i,1,5] = TWRCI_res[[i]]$MACR_CRCE_CC
+  res_mat[i,2,5] = locs_res[[i]]$MACR_CRCE_CC
+  res_mat[i,3,5] = cis_res[[i]]$MACR_CRCE_CC
+  res_mat[i,4,5] = cis_eQTLs_res[[i]]$MACR_CRCE_CC
+  res_mat[i,5,5] = coloc_ABF_res[[i]]$MACR_CRCE_CC
+  res_mat[i,6,5] = coloc_susie_res[[i]]$MACR_CRCE_CC
   
 }
 
