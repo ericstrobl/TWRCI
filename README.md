@@ -44,9 +44,12 @@ Run TWRCI:
 
 > out = TWRCI(RNAseq$X,RNAseq$SNP_data,RNAseq$Y,RNAseq$batch)
 
-Print output of TWRCI:
+Print the output of TWRCI:
 > print(out$K) # causal order
+
 > print(out$SNPs) # annotations
+
 > print(out$G_est) # causal graph
+
 > print(out$CRCEs) # CRCE estimates 
 
