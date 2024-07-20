@@ -1,3 +1,5 @@
+### run this script after lifting the GTEx individual-level variant data with BCFtools to hg19 (tested on version 1.18)
+
 require(ieugwasr)
 
 leads = tophits("finn-b-I9_ISCHHEART",pval = 5e-05, clump = 0)
