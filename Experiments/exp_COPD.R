@@ -22,7 +22,7 @@ gene_names =gsub("\\..*","",colnames(ge_f))
 colnames(ge_f) = gene_names
 
 # keep = remove_multicollinear(SNP_data_f)
-out = get_sig_genes_ctrl_Xsplit_SPCR_corr_col(SNP_data_f,cbind(ge_f,target_f),leads_f$p)
+out = get_genes_split(SNP_data_f,cbind(ge_f,target_f),leads_f$p)
 SNP_data_f = SNP_data_f[,out$ix,drop=FALSE]
 leads_f = leads_f[out$ix,,drop=FALSE]
 
