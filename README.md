@@ -16,29 +16,37 @@ The Experiments folder contains any additional code needed to replicate the expe
 > library(TWRCI)
 
 # Run TWRCI on sample data
-Set the number of samples of the variant-expression-phenotype data to 500
+Set the number of samples of the variant-expression-phenotype data to 500:
 
 > nsamps = 500
 
-Instantiate 100 instrumental variables
+Instantiate 100 instrumental variables:
 
-> datat = matrix(rnorm(nsamps*100),nsamps,100) 
+> datat = matrix(rnorm(nsamps*100),nsamps,100)
 
-> p = 30 # 29 gene expression levels and the phenotype
+Set the number of gene expression levels plus the phenotype to 30:
 
-> SNPs = generate_SNP_list(p,ncol(data)/p) # assign SNPs to each gene
+> p = 30 
 
-> G = generate_DAG(p,SNPs$SNPs,bulk_nbatch=1) # generate DAG
+Assign SNPs to each gene:
 
-> RNAseq = sample_data(G,SNPs$SNPs,datat,p=p,nsamps=nsamps) # generate linked RNA-seq and phenotype data
+> SNPs = generate_SNP_list(p,ncol(data)/p)
 
-> out = TWRCI(RNAseq$X,RNAseq$SNP_data,RNAseq$Y,RNAseq$batch) # run TWRCI
+Generate the DAG:
 
-> print(out$K) # print causal order
+> G = generate_DAG(p,SNPs$SNPs,bulk_nbatch=1)
 
-> print(out$SNPs) # print annotations
+Generate the reamining expression-phenotype data:
 
-> print(out$G_est) # print causal graph
+> RNAseq = sample_data(G,SNPs$SNPs,datat,p=p,nsamps=nsamps)
 
-> print(out$CRCEs) # print CRCE estimates 
+Run TWRCI:
+
+> out = TWRCI(RNAseq$X,RNAseq$SNP_data,RNAseq$Y,RNAseq$batch)
+
+Print output of TWRCI:
+> print(out$K) # causal order
+> print(out$SNPs) # annotations
+> print(out$G_est) # causal graph
+> print(out$CRCEs) # CRCE estimates 
 
