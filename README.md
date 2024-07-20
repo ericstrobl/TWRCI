@@ -16,9 +16,13 @@ The Experiments folder contains any additional code needed to replicate the expe
 > library(TWRCI)
 
 # Run TWRCI on sample data
-> nsamps = 500 # ensure 500 samples for the variant-expression-phenotype data
+Set the number of samples of the variant-expression-phenotype data to 500
 
-> datat = matrix(rnorm(nsamps*100),nsamps,100) # instantiate 100 instrumental variables
+> nsamps = 500
+
+Instantiate 100 instrumental variables
+
+> datat = matrix(rnorm(nsamps*100),nsamps,100) 
 
 > p = 30 # 29 gene expression levels and the phenotype
 
