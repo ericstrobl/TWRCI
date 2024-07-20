@@ -28,7 +28,7 @@ Set the number of gene expression levels plus the phenotype to 10:
 
 > p = 10 
 
-Assign SNPs to each gene:
+Assign variants to each gene and the phenotype:
 
 > SNPs = generate_SNP_list(p,ncol(data)/p)
 
