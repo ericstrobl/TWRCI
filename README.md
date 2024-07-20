@@ -17,7 +17,7 @@ The Experiments folder contains any additional code needed to replicate the expe
 
 > library(TWRCI)
 
-# Run TWRCI on synthetic data
+# Run TWRCI on sample data
 > nsamps = 500 # ensure 500 samples for the variant-expression-phenotype data
 
 > datat = matrix(rnorm(nsamps*100),nsamps,100) # instantiate 100 instrumental variables
