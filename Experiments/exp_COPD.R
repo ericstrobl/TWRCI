@@ -17,11 +17,6 @@ RCI_res = Gs
 GRCI_res = Gs
 CausalCell_res = Gs
 
-susie_res = Gs
-TwoSLS_res = Gs
-MVIWAS_res = Gs
-GIFT_res = Gs
-
 load("COPD_exp_SNP_data_controlled2.RData")
 gene_names =gsub("\\..*","",colnames(ge_f))
 colnames(ge_f) = gene_names
@@ -509,34 +504,6 @@ plot(data.umap[,1],data.umap[,2],col=(target_f>1)+1)
 # 
 # plot(data.umap[target_f>1,1],data.umap[target_f>1,2])
 
-BSS = c()
-for (j in 65:100){
-  print(j)
-  data.umap = normalizeData(uwot::umap(ge_fs_age[,iS],y=factor(target_f>1)))
-  cl <- hclust.vector(data.umap[target_f>1,], method="ward")
-  BSS = rbind(BSS, rev(cl$height)[1:10])
-}
-
-BSSs = c()
-for (j in 185:1000){
-  print(j)
-  targett = sample(target_f)
-  data.umap = normalizeData(uwot::umap(ge_fs_age[,iS],y=factor(targett>1)))
-  cl <- hclust.vector(data.umap[targett>1,], method="ward")
-  BSSs = rbind(BSSs, rev(cl$height)[1:10])
-}
-
-for (l in 1:10){
-  print(sum(mean(BSS[,l])>=BSSs[,l])/length(BSSs[,l]))
-}
-sum(mean(BSS)>=BSSs)/length(BSSs)
-
-ps = c()
-for (j in 1:100){
-  ps = c(ps,sum(BSS[j]>=BSSs)/length(BSSs))
-}
-print(mean(ps))
-
 
 load("COPD_UMAP_age_all.RData")
 iS = isAncAll(G_est,1:(p-1),p)
@@ -576,58 +543,6 @@ for(k in 1:4){
   print(mean-1.96*sd)
   print("--------")
 }
-
-
-
-## pathway enrichment
-
-entr_id = c(10256,400752,149297,NaN,
-            84696,51208,132671,65008,
-            3128,54543,28604,23245,
-            219738,118812,NaN,9479,
-            100526771,101930452,3221,NaN,
-            28455,NaN,102723692,NaN,
-            10331,126129,101927117)
-
-stats = c()
-for (s in 1:ncol(ge_f)){
-  stats = c(stats,sqrt(earth_test(ge_f[,s],ge_fs[,18],SNP_data_f[,aa$SNPs[[18]]])$statistic))
-}
-names(stats) = entr_id
-stats = stats[which(names(stats)!=NaN)]
-
-require(fgsea)
-pathways <- reactomePathways(names(stats))
-
-fgseaRes <- fgsea(pathways, stats, nPermSimple = 100000)
-
-collapsedPathways <- collapsePathways(fgseaRes[order(pval)], pathways, stats)
-print(fgseaRes[pathway %in% collapsedPathways$mainPathways][order(pval)][1:20,])
-
-
-# drug enrichment
-dsig <- readr::read_tsv("C:\\Users\\ericv\\AppData\\Local/R/cache/R/BiocFileCache/48581a6d20e0_DSigDB_All_detailed.txt")
-
-drug2gene=dsig[, c("Drug", "Gene")]
-
-require(org.Hs.eg.db)
-drugs = unique(dsig$Drug)
-drug2gene = vector("list", length(drugs))
-entrez = AnnotationDbi::select(org.Hs.eg.db, keys = dsig$Gene, columns = c("ENTREZID", "SYMBOL"), keytype = "SYMBOL")
-ix = match(dsig$Gene,entrez$SYMBOL)
-entrez = entrez$ENTREZID[ix]
-
-for (d in 1:length(drugs)){
-  id = which(dsig$Drug == drugs[d])
-  ee = unique(entrez[id])
-  drug2gene[[d]] <- ee[!is.na(ee)]
-  
-}
-names(drug2gene) = drugs
-
-fgseaRes <- fgsea(drug2gene, stats, nPermSimple = 100000)
-head(fgseaRes[order(pval), ])
-
 
 # histogram of correlations, confounding
 
