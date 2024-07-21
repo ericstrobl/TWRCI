@@ -484,6 +484,14 @@ print(cbind(A,B))
 
 print(mean(alphas[dis==Inf]))
 
+# scaling
+iS = isAncAll(G_est,1:(p-1),p)
+suffStat$batches = normalizeData(age_f)
+mm = estimate_CRCEs(ge_fs,age_f,G_est,aa$SNPs,SNP_data_f,target_f,iS)
+colMeans(mm$CRCE[target_f>1,])/mean(abs(colMeans(mm$CRCE[target_f>1,])))
+colMeans(mm$CRCE[target_f>1,][ix==1,])/mean(abs(colMeans(mm$CRCE[target_f>1, ][ix==1,])))
+colMeans(mm$CRCE[target_f>1,][ix==2,])/mean(abs(colMeans(mm$CRCE[target_f>1, ][ix==2,])))
+
 
 # clustering
 require(uwot)
@@ -501,25 +509,15 @@ plot(rev(cl$height)[1:10])
 k = pathviewr:::find_curve_elbow(cbind(1:10,rev(cl$height)[1:10]))
 ix = cutree(cl, k = k)
 plot(data.umap[target_f>1,],col=ix)
-colMeans(mm$CRCE[target_f>1,iS])/mean(abs(colMeans(mm$CRCE[target_f>1, iS])))
-colMeans(mm$CRCE[target_f>1,iS][ix==1,])/mean(abs(colMeans(mm$CRCE[target_f>1, iS][ix==1,])))
-colMeans(mm$CRCE[target_f>1,iS][ix==2,])/mean(abs(colMeans(mm$CRCE[target_f>1, iS][ix==2,])))
-#colMeans(mm$CRCE[target_f>1,iS][ix==4,])/mean(abs(colMeans(mm$CRCE[target_f>1, iS][ix==4,])))
+colMeans(mm$CRCE[target_f>1,])/mean(abs(colMeans(mm$CRCE[target_f>1, ])))
+colMeans(mm$CRCE[target_f>1,][ix==1,])/mean(abs(colMeans(mm$CRCE[target_f>1, ][ix==1,])))
+colMeans(mm$CRCE[target_f>1,][ix==2,])/mean(abs(colMeans(mm$CRCE[target_f>1, ][ix==2,])))
 data.umap[target_f>1,][ix==1,]
 data.umap[target_f>1,][ix==2,]
 data.umap[target_f>1,][ix==3,]
 
-# scaling
-iS = isAncAll(G_est,1:(p-1),p)
-suffStat$batches = normalizeData(age_f)
-mm = estimate_CRCEs(ge_fs,age_f,G_est,aa$SNPs,SNP_data_f,target_f,iS)
-colMeans(mm$CRCE[target_f>1,])/mean(abs(colMeans(mm$CRCE[target_f>1,])))
-colMeans(mm$CRCE[target_f>1,][ix==1,])/mean(abs(colMeans(mm$CRCE[target_f>1, ][ix==1,])))
-colMeans(mm$CRCE[target_f>1,][ix==2,])/mean(abs(colMeans(mm$CRCE[target_f>1, ][ix==2,])))
-
 # gene expression levels of clusters
 iS =isAncAll(G_est,1:(p-1),p)
-iS = iS[c(2,3,4,6,7)]
 for(k in c(1,2)){
   mean = colMeans(ge_fs[target_f>1,iS][ix==k,])-colMeans(ge_fs[target_f<=1,iS])
   sd = sqrt(apply(ge_fs[target_f>1,iS][ix==k,],2,var)/sum(ix==k) + apply(ge_fs[target_f<=1,iS],2,var)/sum(target_f<=1))
