@@ -484,22 +484,14 @@ print(cbind(A,B))
 
 print(mean(alphas[dis==Inf]))
 
-# scaling
-iS = isAncAll(G_est,1:(p-1),p)
-suffStat$batches = normalizeData(age_f)
-mm = estimate_CRCEs(ge_fs,age_f,G_est,aa$SNPs,SNP_data_f,target_f,iS)
-colMeans(mm$CRCE[target_f>1,])/mean(abs(colMeans(mm$CRCE[target_f>1,])))
-colMeans(mm$CRCE[target_f>1,][ix==1,])/mean(abs(colMeans(mm$CRCE[target_f>1, ][ix==1,])))
-colMeans(mm$CRCE[target_f>1,][ix==2,])/mean(abs(colMeans(mm$CRCE[target_f>1, ][ix==2,])))
-
-
 # clustering
 require(uwot)
 ge_fs_age = earth(age_f,ge_fs)$residuals
-load("IHD_UMAP_age.RData")
+#load("IHD_UMAP_age.RData")
 
 iS = isAncAll(G_est,1:(p-1),p)
-
+suffStat$batches = normalizeData(age_f)
+mm = estimate_CRCEs(ge_fs,age_f,G_est,aa$SNPs,SNP_data_f,target_f,iS)
 
 data.umap = normalizeData(uwot::umap(ge_fs_age[,setdiff(iS,p)],y=factor(target_f>1)))
 plot(data.umap[,1],data.umap[,2],col=(target_f>1)+1)
@@ -515,6 +507,17 @@ colMeans(mm$CRCE[target_f>1,][ix==2,])/mean(abs(colMeans(mm$CRCE[target_f>1, ][i
 data.umap[target_f>1,][ix==1,]
 data.umap[target_f>1,][ix==2,]
 data.umap[target_f>1,][ix==3,]
+
+
+
+# scaling
+iS = isAncAll(G_est,1:(p-1),p)
+suffStat$batches = normalizeData(age_f)
+mm = estimate_CRCEs(ge_fs,age_f,G_est,aa$SNPs,SNP_data_f,target_f,iS)
+colMeans(mm$CRCE[target_f>1,])/mean(abs(colMeans(mm$CRCE[target_f>1,])))
+colMeans(mm$CRCE[target_f>1,][ix==1,])/mean(abs(colMeans(mm$CRCE[target_f>1, ][ix==1,])))
+colMeans(mm$CRCE[target_f>1,][ix==2,])/mean(abs(colMeans(mm$CRCE[target_f>1, ][ix==2,])))
+
 
 # gene expression levels of clusters
 iS =isAncAll(G_est,1:(p-1),p)
