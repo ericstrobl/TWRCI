@@ -12,7 +12,7 @@ MSE_CRCE <- function(Gest, SNPs,
   m0 = matrix(0,n,ncol(Gest)-1)
   for (k in 1:(ncol(Gest)-1)){
     
-    print(k)
+    # print(k)
     
     pa = which(Gest[,k])
     
