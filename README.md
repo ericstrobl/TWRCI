@@ -7,6 +7,8 @@ The academic article describing TWRCI in detail can be found [here](https://www.
 The Experiments folder contains any additional code needed to replicate the experimental results in the paper after downloading GTEx V8 protected access data and lifting over to hg19 with BCFtools. All code was tested in R version 4.3.1 and BCFtools version 1.18.
 
 # Installation
+Install time is under 5 minutes for a typical desktop computer.
+
 > if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")
 
 > library(devtools)
@@ -42,9 +44,10 @@ Generate the reamining expression-phenotype data:
 
 Run TWRCI:
 
-> out = TWRCI(RNAseq$X,RNAseq$SNP_data,RNAseq$Y,RNAseq$batch)
+> out = TWRCI(RNAseq$X, RNAseq$SNP_data, RNAseq$Y, RNAseq$batch, RNAseq$batch, graph=TRUE, CRCEs=TRUE)
 
-Print the output of TWRCI:
+Run time is under 2 minutes for a typical desktop computer. Print the output of TWRCI:
+
 > print(out$K) # causal order
 
 > print(out$SNPs) # annotations
