@@ -513,7 +513,7 @@ colMeans(mm$CRCE[target_f>1,])/mean(abs(colMeans(mm$CRCE[target_f>1,])))
 colMeans(mm$CRCE[target_f>1,][ix==1,])/mean(abs(colMeans(mm$CRCE[target_f>1, ][ix==1,])))
 colMeans(mm$CRCE[target_f>1,][ix==2,])/mean(abs(colMeans(mm$CRCE[target_f>1, ][ix==2,])))
 colMeans(mm$CRCE[target_f>1,][ix==3,])/mean(abs(colMeans(mm$CRCE[target_f>1, ][ix==3,])))
-colMeans(mm$CRCE[target_f>1,iS][ix==4,])/mean(abs(colMeans(mm$CRCE[target_f>1, iS][ix==4,])))
+colMeans(mm$CRCE[target_f>1,iS][ix==4,])/mean(abs(colMeans(mm$CRCE[target_f>1, ][ix==4,])))
 
 # gene expression levels of clusters
 for(k in 1:4){
