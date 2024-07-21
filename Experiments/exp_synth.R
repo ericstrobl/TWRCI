@@ -54,7 +54,7 @@ for (i in 51:100){
   aa = TWRCI(RNAseq$X,RNAseq$SNP_data,RNAseq$Y,RNAseq$batch)
   TWRCI_res[[i]]$time = (proc.time() - ptm)[3]
   # aa = RCI11_Y(RNAseq$X,RNAseq$Y,RNAseq$SNP_data,RNAseq$batch)
-  TWRCI_res[[i]]$MCC = eval_annotations(aa$SNPs,SNPs$SNPs)
+  TWRCI_res[[i]]$MCC = MCC_annotations(aa$SNPs,SNPs$SNPs)
   TWRCI_res[[i]]$rank = rank_annot(aa$SNPs,SNPs$SNPs,RNAseq$SNP_data,cbind(RNAseq$X,RNAseq$Y),G,K=aa$K)
   
   ### locations
