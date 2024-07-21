@@ -18,10 +18,10 @@ screen_anc_Y <- function (suffStat, Gest, SNPs=NULL, indepTest=earth_wrap, alpha
     if (!is.null(SNPs)){
       if (root){
         pval <- indepTest(x, p, which(Gest[,x]), unlist(SNPs[-x]), suffStat)
-        print(pval)
+        #print(pval)
       } else{
         pval <- indepTest(x, p, which(Gest[,x]), SNPs[[x]], suffStat)
-        print(pval)
+        #print(pval)
       }
      
     } else{
