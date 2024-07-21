@@ -1,4 +1,4 @@
-generate_SNP_list <- function(p,q,leads){
+generate_SNP_list <- function(p,q,leads=NULL){
   # p = number of genes
   # q = number of SNPs
   
