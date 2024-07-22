@@ -17,7 +17,7 @@ Install time is under 5 minutes for a typical desktop computer.
 
 > library(TWRCI)
 
-# Run TWRCI on sample data
+# Run TWRCI on demo data
 Set the number of samples of the variant-expression-phenotype data to 500:
 
 > nsamps = 500
