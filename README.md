@@ -2,7 +2,7 @@
 
 This is an R package implementing the TWRCI algorithm for discovering root causal gene expression levels -- or root causal genes for short -- from observational data. Root causal genes correspond to the first gene expression levels that are disturbed in disease near the beginning of pathogenesis. In contrast, core genes lie at the end of pathogenesis and driver genes only account for the effects of somatic mutations primarily in cancer. TWRCI requires individual level data containing genetic variants, gene expression levels from the relevant tissue and the phenotype (variant-expression-phenotype data).
 
-The academic article describing TWRCI in detail can be found [here](https://www.google.com). Please cite the article if you use any of the code in this repository.
+The academic article describing TWRCI in detail can be found [here](https://www.medrxiv.org/content/10.1101/2024.07.22.24310837v1). Please cite the article if you use any of the code in this repository.
 
 The Experiments folder contains any additional code needed to replicate the experimental results in the paper after downloading [GTEx V8 protected access data](https://gtexportal.org/home/protectedDataAccess) and lifting over to hg19 with [BCFtools](https://samtools.github.io/bcftools/). All code was tested in R version 4.3.1 and BCFtools version 1.18.
 
