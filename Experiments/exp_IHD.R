@@ -518,15 +518,16 @@ t(apply(res_mat,c(2,3),mean))-1*t(apply(res_mat,c(2,3),sd))/sqrt(10)
 
 # timing annotation
 imax = 10
-res_mat = matrix(0,imax,6)
+res_mat = matrix(0,imax,7)
 for (i in 1:imax){
   print(i)
   res_mat[i,1] = TWRCI_res[[i]]$time
   res_mat[i,2] = locs_res[[i]]$time
   res_mat[i,3] = cis_res[[i]]$time
-  res_mat[i,4] = cis_eQTLs_res[[i]]$time
-  res_mat[i,5] = coloc_ABF_res[[i]]$time
-  res_mat[i,6] = coloc_susie_res[[i]]$time
+  res_mat[i,4] = ctwas_res[[i]]$time
+  res_mat[i,5] = cis_eQTLs_res[[i]]$time
+  res_mat[i,6] = coloc_ABF_res[[i]]$time
+  res_mat[i,7] = coloc_susie_res[[i]]$time
 }
 print(colMeans(res_mat))
 
