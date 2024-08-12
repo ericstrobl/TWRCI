@@ -57,6 +57,8 @@ for (i in 51:100){
   # aa = RCI11_Y(RNAseq$X,RNAseq$Y,RNAseq$SNP_data,RNAseq$batch)
   TWRCI_res[[i]]$MCC = MCC_annotations(aa$SNPs,SNPs$SNPs)
   TWRCI_res[[i]]$rank = rank_annot(aa$SNPs,SNPs$SNPs,RNAseq$SNP_data,cbind(RNAseq$X,RNAseq$Y),G,K=aa$K)
+  TWRCI_res[[i]]$MCC_HP = MCC_annotations(aa$SNPs,SNPs$SNPs,p)
+  TWRCI_res[[i]]$rank_HP = rank_annot(aa$SNPs,SNPs$SNPs,RNAseq$SNP_data,cbind(RNAseq$X,RNAseq$Y),G,p)
   
   ### locations
   # time not applicable here, time = 0 automatically
@@ -75,10 +77,12 @@ for (i in 51:100){
 
   ### cTWAS
   ptm <- proc.time()
-  ctwas = get_eQTLs(cbind(RNAseq$X,RNAseq$Y),RNAseq$SNP_data,cis)
+  cTWAS = ctwas(RNAseq$SNP_data,RNAseq$X,RNAseq$Y,cis,RNAseq$batch)
   ctwas_res[[i]]$time = (proc.time() - ptm)[3]
-  ctwas_res[[i]]$MCC = MCC_annotations(cis_eQTLs,SNPs$SNPs)
-  ctwas_res[[i]]$rank = rank_annot(cis_eQTLs,SNPs$SNPs,RNAseq$SNP_data,cbind(RNAseq$X,RNAseq$Y),G)
+  ctwas_res[[i]]$MCC = MCC_annotations(cTWAS,SNPs$SNPs)
+  ctwas_res[[i]]$rank = rank_annot(cTWAS,SNPs$SNPs,RNAseq$SNP_data,cbind(RNAseq$X,RNAseq$Y),G)
+  ctwas_res[[i]]$MCC_HP = MCC_annotations(cTWAS,SNPs$SNPs,p)
+  ctwas_res[[i]]$rank_HP = rank_annot(cTWAS,SNPs$SNPs,RNAseq$SNP_data,cbind(RNAseq$X,RNAseq$Y),G,p)
   
   ### eQTLs
   ptm <- proc.time()
