@@ -1,5 +1,5 @@
 MACR_annot_graph <- function(G,SNPs,SNP_data,gene_data,batches,
-                                         SNP_data_te,gene_data_te,batches_te){
+                                         SNP_data_te,gene_data_te,batches_te,tar=1:ncol(G)){
   require(MASS)
   require(Rfast)
   require(earth)
@@ -10,7 +10,7 @@ MACR_annot_graph <- function(G,SNPs,SNP_data,gene_data,batches,
   cors = c()
   d = length(SNPs)
   SNPt = 1:d
-  for (k in 1:ncol(G)){
+  for (k in tar){
     pa = which(G[,k])
     
     if (k>1){
