@@ -101,11 +101,11 @@ for (i in 1:ncv){
   cis_res[[i]]$time = (proc.time() - ptm)[3]
   cis_res[[i]]$annot = ng
 
-  # cTWAS
+  ### cTWAS
   ptm <- proc.time()
   cTWAS = ctwas(SNP_data_ft,ge_fst,target_ft,ng$SNPs,cbind(nuisance_ft,age_ft)) # cis SNPs among SNPs passing 5e-5
-  cTWAS_res[[i]]$time = (proc.time() - ptm)[3]
-  cTWAS_res[[i]]$annot = cTWAS
+  ctwas_res[[i]]$time = (proc.time() - ptm)[3]
+  ctwas_res[[i]]$annot = cTWAS
   
   ### cis-eQTLs
   ptm <- proc.time()
