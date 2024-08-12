@@ -11,6 +11,7 @@ Gs = vector("list",reps)
 TWRCI_res = Gs
 locs_res = Gs
 cis_res = Gs
+ctwas_res = Gs
 cis_eQTLs_res = Gs
 coloc_ABF_res = Gs
 coloc_susie_res = Gs
@@ -71,6 +72,13 @@ for (i in 51:100){
   cis_res[[i]]$time = (proc.time() - ptm)[3]
   cis_res[[i]]$MCC = MCC_annotations(cis,SNPs$SNPs)
   cis_res[[i]]$rank = rank_annot(cis,SNPs$SNPs,RNAseq$SNP_data,cbind(RNAseq$X,RNAseq$Y),G)
+
+  ### cTWAS
+  ptm <- proc.time()
+  ctwas = get_eQTLs(cbind(RNAseq$X,RNAseq$Y),RNAseq$SNP_data,cis)
+  ctwas_res[[i]]$time = (proc.time() - ptm)[3]
+  ctwas_res[[i]]$MCC = MCC_annotations(cis_eQTLs,SNPs$SNPs)
+  ctwas_res[[i]]$rank = rank_annot(cis_eQTLs,SNPs$SNPs,RNAseq$SNP_data,cbind(RNAseq$X,RNAseq$Y),G)
   
   ### eQTLs
   ptm <- proc.time()
@@ -139,6 +147,7 @@ for (i in 51:100){
   TWRCI_res[[i]]$MACR_annot_graph = MACR_annot_graph(G_est,aa$SNPs,X,Y,B,Xte,Yte,Bte)
   locs_res[[i]]$MACR_annot_graph = MACR_annot_graph(G_est,ng_1,X,Y,B,Xte,Yte,Bte)
   cis_res[[i]]$MACR_annot_graph = MACR_annot_graph(G_est,cis,X,Y,B,Xte,Yte,Bte)
+  ctwas_res[[i]]$MACR_annot_graph = MACR_annot_graph(G_est,cTWAS,X,Y,B,Xte,Yte,Bte)
   cis_eQTLs_res[[i]]$MACR_annot_graph = MACR_annot_graph(G_est,cis_eQTLs,X,Y,B,Xte,Yte,Bte)
   coloc_ABF_res[[i]]$MACR_annot_graph = MACR_annot_graph(G_est,CL,X,Y,B,Xte,Yte,Bte)
   coloc_susie_res[[i]]$MACR_annot_graph = MACR_annot_graph(G_est,CL_susie,X,Y,B,Xte,Yte,Bte)
@@ -192,6 +201,7 @@ for (i in 51:100){
   TWRCI_res[[i]]$MACR_annot_graph_SIGNET = MACR_annot_graph(G_est,aa$SNPs,X,Y,B,Xte,Yte,Bte)
   locs_res[[i]]$MACR_annot_graph_SIGNET = MACR_annot_graph(G_est,ng_1,X,Y,B,Xte,Yte,Bte)
   cis_res[[i]]$MACR_annot_graph_SIGNET = MACR_annot_graph(G_est,cis,X,Y,B,Xte,Yte,Bte)
+  ctwas_res[[i]]$MACR_annot_graph_SIGNET = MACR_annot_graph(G_est,cTWAS,X,Y,B,Xte,Yte,Bte)
   cis_eQTLs_res[[i]]$MACR_annot_graph_SIGNET = MACR_annot_graph(G_est,cis_eQTLs,X,Y,B,Xte,Yte,Bte)
   coloc_ABF_res[[i]]$MACR_annot_graph_SIGNET = MACR_annot_graph(G_est,CL,X,Y,B,Xte,Yte,Bte)
   coloc_susie_res[[i]]$MACR_annot_graph_SIGNET = MACR_annot_graph(G_est,CL_susie,X,Y,B,Xte,Yte,Bte)
@@ -239,6 +249,7 @@ for (i in 51:100){
   TWRCI_res[[i]]$MACR_annot_graph_RCI = MACR_annot_graph(G_est,aa$SNPs,X,Y,B,Xte,Yte,Bte)
   locs_res[[i]]$MACR_annot_graph_RCI = MACR_annot_graph(G_est,ng_1,X,Y,B,Xte,Yte,Bte)
   cis_res[[i]]$MACR_annot_graph_RCI = MACR_annot_graph(G_est,cis,X,Y,B,Xte,Yte,Bte)
+  ctwas_res[[i]]$MACR_annot_graph_RCI = MACR_annot_graph(G_est,cTWAS,X,Y,B,Xte,Yte,Bte)
   cis_eQTLs_res[[i]]$MACR_annot_graph_RCI = MACR_annot_graph(G_est,cis_eQTLs,X,Y,B,Xte,Yte,Bte)
   coloc_ABF_res[[i]]$MACR_annot_graph_RCI = MACR_annot_graph(G_est,CL,X,Y,B,Xte,Yte,Bte)
   coloc_susie_res[[i]]$MACR_annot_graph_RCI = MACR_annot_graph(G_est,CL_susie,X,Y,B,Xte,Yte,Bte)
@@ -277,6 +288,7 @@ for (i in 51:100){
   TWRCI_res[[i]]$MACR_annot_graph_GRCI = MACR_annot_graph(G_est,aa$SNPs,X,Y,B,Xte,Yte,Bte)
   locs_res[[i]]$MACR_annot_graph_GRCI = MACR_annot_graph(G_est,ng_1,X,Y,B,Xte,Yte,Bte)
   cis_res[[i]]$MACR_annot_graph_GRCI = MACR_annot_graph(G_est,cis,X,Y,B,Xte,Yte,Bte)
+  ctwas_res[[i]]$MACR_annot_graph_GRCI = MACR_annot_graph(G_est,cTWAS,X,Y,B,Xte,Yte,Bte)
   cis_eQTLs_res[[i]]$MACR_annot_graph_GRCI = MACR_annot_graph(G_est,cis_eQTLs,X,Y,B,Xte,Yte,Bte)
   coloc_ABF_res[[i]]$MACR_annot_graph_GRCI = MACR_annot_graph(G_est,CL,X,Y,B,Xte,Yte,Bte)
   coloc_susie_res[[i]]$MACR_annot_graph_GRCI = MACR_annot_graph(G_est,CL_susie,X,Y,B,Xte,Yte,Bte)
@@ -316,6 +328,7 @@ for (i in 51:100){
   TWRCI_res[[i]]$MACR_annot_graph_CC = MACR_annot_graph(G_est,aa$SNPs,X,Y,B,Xte,Yte,Bte)
   locs_res[[i]]$MACR_annot_graph_CC = MACR_annot_graph(G_est,ng_1,X,Y,B,Xte,Yte,Bte)
   cis_res[[i]]$MACR_annot_graph_CC = MACR_annot_graph(G_est,cis,X,Y,B,Xte,Yte,Bte)
+  ctwas_res[[i]]$MACR_annot_graph_CC = MACR_annot_graph(G_est,cTWAS,X,Y,B,Xte,Yte,Bte)
   cis_eQTLs_res[[i]]$MACR_annot_graph_CC = MACR_annot_graph(G_est,cis_eQTLs,X,Y,B,Xte,Yte,Bte)
   coloc_ABF_res[[i]]$MACR_annot_graph_CC = MACR_annot_graph(G_est,CL,X,Y,B,Xte,Yte,Bte)
   coloc_susie_res[[i]]$MACR_annot_graph_CC = MACR_annot_graph(G_est,CL_susie,X,Y,B,Xte,Yte,Bte)
@@ -335,14 +348,14 @@ for (i in 51:100){
   coloc_susie_res[[i]]$MACR_CRCE_CC = MACR_CRCE(G_est,CL_susie,X,Yg,B,Yy,Xte,Ygte,Bte,Yyte)
   
   save(file="Results_synth.RData", Gs, 
-       TWRCI_res, locs_res, cis_res, cis_eQTLs_res, coloc_ABF_res, coloc_susie_res, 
+       TWRCI_res, locs_res, cis_res, ctwas_res, cis_eQTLs_res, coloc_ABF_res, coloc_susie_res, 
        SIGNET_res, RCI_res, GRCI_res, CausalCell_res)
 }
 
 
 # annotation
 imax = 60
-res_mat = array(0,c(imax,6,5))
+res_mat = array(0,c(imax,7,5))
 for (i in 1:imax){
   res_mat[i,1,1] = TWRCI_res[[i]]$MACR_annot_graph
   res_mat[i,2,1] = locs_res[[i]]$MACR_annot_graph
@@ -350,6 +363,7 @@ for (i in 1:imax){
   res_mat[i,4,1] = cis_eQTLs_res[[i]]$MACR_annot_graph
   res_mat[i,5,1] = coloc_ABF_res[[i]]$MACR_annot_graph
   res_mat[i,6,1] = coloc_susie_res[[i]]$MACR_annot_graph
+  res_mat[i,7,1] = ctwas_res[[i]]$MACR_annot_graph      
   
   res_mat[i,1,2] = TWRCI_res[[i]]$MACR_annot_graph_SIGNET
   res_mat[i,2,2] = locs_res[[i]]$MACR_annot_graph_SIGNET
@@ -357,6 +371,7 @@ for (i in 1:imax){
   res_mat[i,4,2] = cis_eQTLs_res[[i]]$MACR_annot_graph_SIGNET
   res_mat[i,5,2] = coloc_ABF_res[[i]]$MACR_annot_graph_SIGNET
   res_mat[i,6,2] = coloc_susie_res[[i]]$MACR_annot_graph_SIGNET
+  res_mat[i,7,2] = ctwas_res[[i]]$MACR_annot_graph_SIGNET
   
   res_mat[i,1,3] = TWRCI_res[[i]]$MACR_annot_graph_RCI
   res_mat[i,2,3] = locs_res[[i]]$MACR_annot_graph_RCI
@@ -364,6 +379,7 @@ for (i in 1:imax){
   res_mat[i,4,3] = cis_eQTLs_res[[i]]$MACR_annot_graph_RCI
   res_mat[i,5,3] = coloc_ABF_res[[i]]$MACR_annot_graph_RCI
   res_mat[i,6,3] = coloc_susie_res[[i]]$MACR_annot_graph_RCI
+  res_mat[i,7,3] = ctwas_res[[i]]$MACR_annot_graph_RCI
   
   res_mat[i,1,4] = TWRCI_res[[i]]$MACR_annot_graph_GRCI
   res_mat[i,2,4] = locs_res[[i]]$MACR_annot_graph_GRCI
@@ -371,6 +387,7 @@ for (i in 1:imax){
   res_mat[i,4,4] = cis_eQTLs_res[[i]]$MACR_annot_graph_GRCI
   res_mat[i,5,4] = coloc_ABF_res[[i]]$MACR_annot_graph_GRCI
   res_mat[i,6,4] = coloc_susie_res[[i]]$MACR_annot_graph_GRCI
+  res_mat[i,7,4] = ctwas_res[[i]]$MACR_annot_graph_GRCI
   
   res_mat[i,1,5] = TWRCI_res[[i]]$MACR_annot_graph_CC
   res_mat[i,2,5] = locs_res[[i]]$MACR_annot_graph_CC
@@ -378,6 +395,7 @@ for (i in 1:imax){
   res_mat[i,4,5] = cis_eQTLs_res[[i]]$MACR_annot_graph_CC
   res_mat[i,5,5] = coloc_ABF_res[[i]]$MACR_annot_graph_CC
   res_mat[i,6,5] = coloc_susie_res[[i]]$MACR_annot_graph_CC
+  res_mat[i,7,5] = ctwas_res[[i]]$MACR_annot_graph_CC
   
 }
 
@@ -479,7 +497,7 @@ t(apply(res_mat,c(2,3),mean))-1.96*t(apply(res_mat,c(2,3),sd))/sqrt(60)
 
 # annotation
 imax = 60
-res_mat = matrix(0,imax,6)
+res_mat = matrix(0,imax,7)
 for (i in 1:imax){
   res_mat[i,1] = TWRCI_res[[i]]$MCC
   res_mat[i,2] = locs_res[[i]]$MCC
@@ -487,7 +505,7 @@ for (i in 1:imax){
   res_mat[i,4] = cis_eQTLs_res[[i]]$MCC
   res_mat[i,5] = coloc_ABF_res[[i]]$MCC
   res_mat[i,6] = coloc_susie_res[[i]]$MCC
-  
+  res_mat[i,7] = ctwas_res[[i]]$MCC
 }
 print(colMeans(res_mat))
 
@@ -505,7 +523,7 @@ print(colMeans(res_mat))
 
 # timing annotation
 imax = 60
-res_mat = matrix(0,imax,6)
+res_mat = matrix(0,imax,7)
 for (i in 1:imax){
   print(i)
   res_mat[i,1] = TWRCI_res[[i]]$time
@@ -514,6 +532,7 @@ for (i in 1:imax){
   res_mat[i,4] = cis_eQTLs_res[[i]]$time
   res_mat[i,5] = coloc_ABF_res[[i]]$time
   res_mat[i,6] = coloc_susie_res[[i]]$time
+  res_mat[i,7] = ctwas_res[[i]]$time
 }
 print(colMeans(res_mat))
 
