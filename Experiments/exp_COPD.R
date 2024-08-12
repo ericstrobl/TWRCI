@@ -533,3 +533,50 @@ hh = hist( (1-pt(abs(ts),nrow(ge_fs)-2))*2)
 hh$mids
 hh$counts
 ks.test((1-pt(abs(ts),nrow(ge_fs)-2))*2,"punif",0,1)
+
+# trans-eQTLs
+require(FNN)
+trans = read.csv("trans_eQTLs.csv") # https://eqtlgen.org/trans-eqtls.html
+anc = isAncAll(G_est,1:(p-1),p)
+leads_fa = leads_f[unlist(aa$SNPs[anc]),]
+
+dists = c()
+for (c in 1:22){
+  it = which(trans$SNPChr == c)
+  il = which(leads_fa$chr == as.character(c))
+  
+  pos = c(trans$SNPPos[it],leads_fa$position[il])
+  trans$SNPPos[it] = trans$SNPPos[it]/sd(pos)
+  leads_fa$position[il] = leads_fa$position[il]/sd(pos)
+}
+
+dists = c()
+for (c in 1:22){
+  it = which(trans$SNPChr == c)
+  il = which(leads_fa$chr == as.character(c))
+  
+  dist = knnx.dist(trans$SNPPos[it],leads_fa$position[il],k=1)
+  dists = c(dists,dist)
+}
+dist_stat = median(dists)
+
+dist_median = c()
+for (p in 1:10000){
+  print(p)
+  r = length(trans$SNPPos)
+  transt = trans
+  transt$SNPPos = transt$SNPPos[sample(1:r,r,replace=FALSE)]
+  dists = c()
+  for (c in 1:22){
+    it = which(transt$SNPChr == c)
+    il = which(leads_fa$chr == as.character(c))
+    
+    dist = knnx.dist(transt$SNPPos[it],leads_fa$position[il],k=1)
+    dists = c(dists,dist)
+  }
+  dist_median = c(dist_median, median(dists))
+}
+mean(dist_median<dist_stat)
+mean(dist_median/dist_stat)
+mean(dist_median/dist_stat) + 1.96*sd(dist_median/dist_stat)/sqrt(10000)
+mean(dist_median/dist_stat) - 1.96*sd(dist_median/dist_stat)/sqrt(10000)
