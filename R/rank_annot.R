@@ -1,4 +1,4 @@
-rank_annot <- function(SNPs, SNPt, SNP_data, gene_data, G, K=NULL){
+rank_annot <- function(SNPs, SNPt, SNP_data, gene_data, G, K=NULL, tar = 1:length(SNPs)){
   
   SNP_data = normalizeData(SNP_data)
   gene_data = normalizeData(gene_data)
@@ -7,7 +7,7 @@ rank_annot <- function(SNPs, SNPt, SNP_data, gene_data, G, K=NULL){
   
   L = length(SNPs)
   avg_norm_ranks = c()
-  for (s in 1:L){
+  for (s in tar){
     if (length(SNPs[[s]])==0){
       avg_norm_ranks = c(avg_norm_ranks, 0)
     } else{
