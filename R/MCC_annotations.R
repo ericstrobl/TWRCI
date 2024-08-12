@@ -1,4 +1,4 @@
-MCC_annotations <- function(SNPs_est,SNPs_GT){
+MCC_annotations <- function(SNPs_est,SNPs_GT,tar=1:length(SNPs_GT)){
   
   MCCs = c()
   L = length(SNPs_GT)
@@ -10,7 +10,7 @@ MCC_annotations <- function(SNPs_est,SNPs_GT){
     SNPs_est[length(SNPs_GT)] = list(NULL)
   }
 
-  for (s in 1:length(SNPs_GT)){
+  for (s in tar){
     # SNP = setdiff(SNPs_GT[[s]], SNPs_GT[[L]])
     # an = setdiff(SNPs_est[[s]], SNPs_GT[[L]])
     SNP = SNPs_GT[[s]]
