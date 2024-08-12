@@ -1,4 +1,4 @@
-MACR_silver_standard <- function(Y,G,exp_d,SNP_d,SNPs,nu_d,desc,exp_d_all){
+MACR_silver <- function(Y,G,exp_d,SNP_d,SNPs,nu_d,desc,exp_d_all){
   
   anc = isAncAll(G,1:(ncol(G)-1),ncol(G))
   
