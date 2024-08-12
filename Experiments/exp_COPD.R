@@ -33,12 +33,11 @@ p = ncol(ge_fs)+1
 
 nuisance_fs = ge_f[,setdiff(out$i2,p)]
 
-# stratified cross-validation
+# stratified cross-validation indices
 ncv = 10
 folds = rep(0,length.out=length(target_f))
 folds[target_f>=0.5] = rep(1:ncv,length.out=sum(target_f>=0.5))
 folds[target_f<0.5] = rep(1:ncv,length.out=sum(target_f<0.5))
-
 
 #TSS = read.csv("hg19_ensembl_TSS.csv")
 #ensembl = useEnsembl(biomart="ensembl", dataset="hsapiens_gene_ensembl", GRCh=37)
@@ -47,6 +46,23 @@ folds[target_f<0.5] = rep(1:ncv,length.out=sum(target_f<0.5))
 #save(file="gene_info_COPD.RData",gene_info)
 load("gene_info_COPD.RData")
 
+# get descendants for silver standard
+bb = kegg.gsets(species = "hsa", id.type="entrez", check.new=FALSE) 
+library("AnnotationDbi")
+library("org.Hs.eg.db")
+EnsID = mapIds(org.Hs.eg.db,
+               keys=bb$kg.sets$`hsa04660 T cell receptor signaling pathway`,
+               column="ENSEMBL",
+               keytype="ENTREZID",
+               multiVals="first")
+desc = which(colnames(ge_f) %in% EnsID)
+ps= c()
+for (d in desc){
+  ps = c(ps, cor.test(ge_f[,d],target_f)$p.value)
+}
+desc = desc[which(ps<0.05)]
+
+# run stratified cross-validation
 for (i in 1:ncv){
   print(i)
   
@@ -115,7 +131,7 @@ for (i in 1:ncv){
   suffStat$data = normalizeData(cbind(ge_fst,target_ft));
   suffStat$SNP_data = normalizeData(SNP_data_ft)
   
-  #TWRCI
+  # TWRCI
   print("TWRCI_graph")
   ptm <- proc.time()
   skel = my_skeleton_p(suffStat, p-1, SNPs=aa$SNPs, alpha=0.05)
@@ -157,6 +173,14 @@ for (i in 1:ncv){
   cis_eQTLs_res[[i]]$MACR_CRCE = MACR_CRCE(G_est,cis_eQTLs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   coloc_ABF_res[[i]]$MACR_CRCE = MACR_CRCE(G_est,CL,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   coloc_susie_res[[i]]$MACR_CRCE = MACR_CRCE(G_est,CL_susie,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
+
+  TWRCI_res[[i]]$MACR_silver = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],aa$SNPs,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  locs_res[[i]]$MACR_silver = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],ng_1$SNPs,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  cis_res[[i]]$MACR_silver = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],ng$SNPs,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  ctwas_res[[i]]$MACR_silver = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],cTWAS,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  cis_eQTLs_res[[i]]$MACR_silver =  MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],cis_eQTLs,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  coloc_ABF_res[[i]]$MACR_silver = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],CL,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  coloc_susie_res[[i]]$MACR_silver = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],CL_susie,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
   
   
   ## get graph for SIGNET below
@@ -198,6 +222,14 @@ for (i in 1:ncv){
   cis_eQTLs_res[[i]]$MACR_CRCE_SIGNET = MACR_CRCE(G_est,cis_eQTLs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   coloc_ABF_res[[i]]$MACR_CRCE_SIGNET = MACR_CRCE(G_est,CL,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   coloc_susie_res[[i]]$MACR_CRCE_SIGNET = MACR_CRCE(G_est,CL_susie,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
+
+  TWRCI_res[[i]]$MACR_silver_SIGNET = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],aa$SNPs,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  locs_res[[i]]$MACR_silver_SIGNET = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],ng_1$SNPs,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  cis_res[[i]]$MACR_silver_SIGNET = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],ng$SNPs,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  ctwas_res[[i]]$MACR_silver_SIGNET = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],cTWAS,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  cis_eQTLs_res[[i]]$MACR_silver_SIGNET =  MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],cis_eQTLs,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  coloc_ABF_res[[i]]$MACR_silver_SIGNET = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],CL,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  coloc_susie_res[[i]]$MACR_silver_SIGNET = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],CL_susie,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
   
   
   ## get graph for RCI, GRCI and PC below
@@ -240,6 +272,14 @@ for (i in 1:ncv){
   coloc_ABF_res[[i]]$MACR_CRCE_RCI = MACR_CRCE(G_est,CL,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   coloc_susie_res[[i]]$MACR_CRCE_RCI = MACR_CRCE(G_est,CL_susie,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
 
+  TWRCI_res[[i]]$MACR_silver_RCI = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],aa$SNPs,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  locs_res[[i]]$MACR_silver_RCI = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],ng_1$SNPs,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  cis_res[[i]]$MACR_silver_RCI = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],ng$SNPs,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  ctwas_res[[i]]$MACR_silver_RCI = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],cTWAS,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  cis_eQTLs_res[[i]]$MACR_silver_RCI =  MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],cis_eQTLs,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  coloc_ABF_res[[i]]$MACR_silver_RCI = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],CL,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  coloc_susie_res[[i]]$MACR_silver_RCI = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],CL_susie,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  
   ### GRCI
   print("GRCI_graph")
   ptm <- proc.time()
@@ -269,6 +309,14 @@ for (i in 1:ncv){
   cis_eQTLs_res[[i]]$MACR_CRCE_GRCI = MACR_CRCE(G_est,cis_eQTLs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   coloc_ABF_res[[i]]$MACR_CRCE_GRCI = MACR_CRCE(G_est,CL,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   coloc_susie_res[[i]]$MACR_CRCE_GRCI = MACR_CRCE(G_est,CL_susie,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
+
+  TWRCI_res[[i]]$MACR_silver_GRCI = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],aa$SNPs,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  locs_res[[i]]$MACR_silver_GRCI = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],ng_1$SNPs,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  cis_res[[i]]$MACR_silver_GRCI = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],ng$SNPs,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  ctwas_res[[i]]$MACR_silver_GRCI = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],cTWAS,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  cis_eQTLs_res[[i]]$MACR_silver_GRCI =  MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],cis_eQTLs,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  coloc_ABF_res[[i]]$MACR_silver_GRCI = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],CL,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  coloc_susie_res[[i]]$MACR_silver_GRCI = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],CL_susie,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
   
 
   ### CausalCell / PC
@@ -301,6 +349,14 @@ for (i in 1:ncv){
   cis_eQTLs_res[[i]]$MACR_CRCE_CC = MACR_CRCE(G_est,cis_eQTLs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   coloc_ABF_res[[i]]$MACR_CRCE_CC = MACR_CRCE(G_est,CL,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   coloc_susie_res[[i]]$MACR_CRCE_CC = MACR_CRCE(G_est,CL_susie,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
+
+  TWRCI_res[[i]]$MACR_silver_CC = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],aa$SNPs,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  locs_res[[i]]$MACR_silver_CC = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],ng_1$SNPs,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  cis_res[[i]]$MACR_silver_CC = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],ng$SNPs,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  ctwas_res[[i]]$MACR_silver_CC = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],cTWAS,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  cis_eQTLs_res[[i]]$MACR_silver_CC =  MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],cis_eQTLs,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  coloc_ABF_res[[i]]$MACR_silver_CC = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],CL,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
+  coloc_susie_res[[i]]$MACR_silver_CC = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],CL_susie,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
   
   
   save(file="Results_COPD_cv10_again_age_resid2_G_nuisance3.RData", Gs, TWRCI_res, locs_res, cis_res, ctwas_res, cis_eQTLs_res, coloc_ABF_res, coloc_susie_res, 
@@ -410,6 +466,55 @@ t(apply(res_mat,c(2,3),mean))+1*t(apply(res_mat,c(2,3),sd))/sqrt(10)
 t(apply(res_mat,c(2,3),mean))-1*t(apply(res_mat,c(2,3),sd))/sqrt(10)
 
 
+# silver standard
+imax =10
+res_mat = array(0,c(imax,7,5))
+for (i in 1:imax){
+  res_mat[i,1,1] = TWRCI_res[[i]]$MACR_silver
+  res_mat[i,2,1] = locs_res[[i]]$MACR_silver
+  res_mat[i,3,1] = cis_res[[i]]$MACR_silver
+  res_mat[i,4,1] = ctwas_res[[i]]$MACR_silver
+  res_mat[i,5,1] = cis_eQTLs_res[[i]]$MACR_silver
+  res_mat[i,6,1] = coloc_ABF_res[[i]]$MACR_silver
+  res_mat[i,7,1] = coloc_susie_res[[i]]$MACR_silver
+  
+  res_mat[i,1,2] = TWRCI_res[[i]]$MACR_silver_SIGNET
+  res_mat[i,2,2] = locs_res[[i]]$MACR_silver_SIGNET
+  res_mat[i,3,2] = cis_res[[i]]$MACR_silver_SIGNET
+  res_mat[i,4,2] = ctwas_res[[i]]$MACR_silver_SIGNET
+  res_mat[i,5,2] = cis_eQTLs_res[[i]]$MACR_silver_SIGNET
+  res_mat[i,6,2] = coloc_ABF_res[[i]]$MACR_silver_SIGNET
+  res_mat[i,7,2] = coloc_susie_res[[i]]$MACR_silver_SIGNET
+  
+  res_mat[i,1,3] = TWRCI_res[[i]]$MACR_silver_RCI
+  res_mat[i,2,3] = locs_res[[i]]$MACR_silver_RCI
+  res_mat[i,3,3] = cis_res[[i]]$MACR_silver_RCI
+  res_mat[i,4,3] = ctwas_res[[i]]$MACR_silver_RCI
+  res_mat[i,5,3] = cis_eQTLs_res[[i]]$MACR_silver_RCI
+  res_mat[i,6,3] = coloc_ABF_res[[i]]$MACR_silver_RCI
+  res_mat[i,7,3] = coloc_susie_res[[i]]$MACR_silver_RCI
+  
+  res_mat[i,1,4] = TWRCI_res[[i]]$MACR_silver_GRCI
+  res_mat[i,2,4] = locs_res[[i]]$MACR_silver_GRCI
+  res_mat[i,3,4] = cis_res[[i]]$MACR_silver_GRCI
+  res_mat[i,4,4] = ctwas_res[[i]]$MACR_silver_GRCI
+  res_mat[i,5,4] = cis_eQTLs_res[[i]]$MACR_silver_GRCI
+  res_mat[i,6,4] = coloc_ABF_res[[i]]$MACR_silver_GRCI
+  res_mat[i,7,4] = coloc_susie_res[[i]]$MACR_silver_GRCI
+  
+  res_mat[i,1,5] = TWRCI_res[[i]]$MACR_silver_CC
+  res_mat[i,2,5] = locs_res[[i]]$MACR_silver_CC
+  res_mat[i,3,5] = cis_res[[i]]$MACR_silver_CC
+  res_mat[i,4,5] = ctwas_res[[i]]$MACR_silver_CC
+  res_mat[i,5,5] = cis_eQTLs_res[[i]]$MACR_silver_CC
+  res_mat[i,6,5] = coloc_ABF_res[[i]]$MACR_silver_CC
+  res_mat[i,7,5] = coloc_susie_res[[i]]$MACR_silver_CC
+  
+}
+
+t(apply(res_mat,c(2,3),mean))
+t(apply(res_mat,c(2,3),mean))+1*t(apply(res_mat,c(2,3),sd))/sqrt(10)
+t(apply(res_mat,c(2,3),mean))-1*t(apply(res_mat,c(2,3),sd))/sqrt(10)
 
 # timing annotation
 imax = 10
