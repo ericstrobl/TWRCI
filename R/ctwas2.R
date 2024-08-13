@@ -1,6 +1,7 @@
 ctwas2 <- function(Z,X,Y,cis,batches){ 
   # This function was modified from the cTWAS package. All directories below need to be customized in order
-  # for this function to run properly.
+  # for this function to run properly. See this cTWAS tutorial https://xinhe-lab.github.io/ctwas/articles/ctwas_summary_statistics.html
+  # for a walkthrough.
 
   require(logging)
   require(ctwas)
