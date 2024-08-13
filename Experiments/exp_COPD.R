@@ -103,7 +103,7 @@ for (i in 1:ncv){
 
   ### cTWAS
   ptm <- proc.time()
-  cTWAS = ctwas(SNP_data_ft,ge_fst,target_ft,ng$SNPs,cbind(nuisance_ft,age_ft)) # cis SNPs among SNPs passing 5e-5
+  cTWAS = ctwas(SNP_data_ft,ge_fst,target_ft,ng$SNPs,cbind(nuisance_ft,age_ft)) # directories in this function need to be customized by following https://xinhe-lab.github.io/ctwas/articles/ctwas_summary_statistics.html
   ctwas_res[[i]]$time = (proc.time() - ptm)[3]
   ctwas_res[[i]]$annot = cTWAS
   
