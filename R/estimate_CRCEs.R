@@ -36,7 +36,7 @@ estimate_CRCEs <- function(X,batches,Gest,SNPs,SNP_d,Y,anc,Xte=NULL){
     # 
     CRCE_mean = c(CRCE_mean,  mean( m1[Y>1] - m2[Y>1]) - mean( m1[Y<=1] - m2[Y<=1]))
     CRCE = cbind(CRCE,  m1 - m2)
-    print(CRCE_mean)
+    # print(CRCE_mean)
   }
   
   return( list(CRCE_mean=CRCE_mean, CRCE = CRCE))
