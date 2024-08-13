@@ -11,13 +11,17 @@ Install time is under 5 minutes for a typical desktop computer.
 
 > if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")
 
+> BiocManager::install(c("qvalue", "biomaRt", "AnnotationDbi", "org.Hs.eg.db", "gage"))
+
 > library(devtools)
 
 > install_github("ericstrobl/TWRCI")
 
 > library(TWRCI)
 
-Installation of the cTWAS package is also required, if you want to replicate the experiments:
+Installation of the independence and cTWAS packagees are also required, if you want to replicate the experiments:
+
+> install_github("chaim-e/independence")
 
 > install_github("xinhe-lab/ctwas",ref = "main")
 
@@ -42,7 +46,7 @@ Generate the DAG:
 
 > G = generate_DAG(p,SNPs$SNPs,bulk_nbatch=1)
 
-Generate the reamining expression-phenotype data:
+Generate the remaining expression-phenotype data:
 
 > RNAseq = sample_data(G,SNPs$SNPs,datat,p=p,nsamps=nsamps)
 
