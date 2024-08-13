@@ -64,8 +64,8 @@ for (i in 51:100){
   # time not applicable here, time = 0 automatically
   ng_1 = get_cis_SNPs_window(SNPs$locs[-p],leads[keep1[keep],],window=Inf)
   ng_1[p] = list(NULL)
-  locs_res[[i]]$MCC = MCC_annotations(SNPs$locs[-p],SNPs$SNPs)
-  locs_res[[i]]$rank = rank_annot(SNPs$locs,SNPs$SNPs,RNAseq$SNP_data,cbind(RNAseq$X,RNAseq$Y),G)
+  locs_res[[i]]$MCC = MCC_annotations(ng_1,SNPs$SNPs)
+  locs_res[[i]]$rank = rank_annot(ng_1,SNPs$SNPs,RNAseq$SNP_data,cbind(RNAseq$X,RNAseq$Y),G)
   
   ### cis-SNPs
   ptm <- proc.time()
