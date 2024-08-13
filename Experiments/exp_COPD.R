@@ -169,7 +169,6 @@ for (i in 1:ncv){
   TWRCI_res[[i]]$MACR_CRCE = MACR_CRCE(G_est,aa$SNPs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   locs_res[[i]]$MACR_CRCE = MACR_CRCE(G_est,ng_1$SNPs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   cis_res[[i]]$MACR_CRCE = MACR_CRCE(G_est,ng$SNPs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
-  ctwas_res[[i]]$MACR_CRCE = MACR_CRCE(G_est,cTWAS,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   cis_eQTLs_res[[i]]$MACR_CRCE = MACR_CRCE(G_est,cis_eQTLs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   coloc_ABF_res[[i]]$MACR_CRCE = MACR_CRCE(G_est,CL,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   coloc_susie_res[[i]]$MACR_CRCE = MACR_CRCE(G_est,CL_susie,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
@@ -218,7 +217,6 @@ for (i in 1:ncv){
   TWRCI_res[[i]]$MACR_CRCE_SIGNET = MACR_CRCE(G_est,aa$SNPs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   locs_res[[i]]$MACR_CRCE_SIGNET = MACR_CRCE(G_est,ng_1$SNPs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   cis_res[[i]]$MACR_CRCE_SIGNET = MACR_CRCE(G_est,ng$SNPs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
-  ctwas_res[[i]]$MACR_CRCE_SIGNET = MACR_CRCE(G_est,cTWAS,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   cis_eQTLs_res[[i]]$MACR_CRCE_SIGNET = MACR_CRCE(G_est,cis_eQTLs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   coloc_ABF_res[[i]]$MACR_CRCE_SIGNET = MACR_CRCE(G_est,CL,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   coloc_susie_res[[i]]$MACR_CRCE_SIGNET = MACR_CRCE(G_est,CL_susie,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
@@ -267,7 +265,6 @@ for (i in 1:ncv){
   TWRCI_res[[i]]$MACR_CRCE_RCI = MACR_CRCE(G_est,aa$SNPs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   locs_res[[i]]$MACR_CRCE_RCI = MACR_CRCE(G_est,ng_1$SNPs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   cis_res[[i]]$MACR_CRCE_RCI = MACR_CRCE(G_est,ng$SNPs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
-  ctwas_res[[i]]$MACR_CRCE_RCI = MACR_CRCE(G_est,cTWAS,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   cis_eQTLs_res[[i]]$MACR_CRCE_RCI = MACR_CRCE(G_est,cis_eQTLs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   coloc_ABF_res[[i]]$MACR_CRCE_RCI = MACR_CRCE(G_est,CL,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   coloc_susie_res[[i]]$MACR_CRCE_RCI = MACR_CRCE(G_est,CL_susie,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
@@ -305,7 +302,6 @@ for (i in 1:ncv){
   TWRCI_res[[i]]$MACR_CRCE_GRCI = MACR_CRCE(G_est,aa$SNPs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   locs_res[[i]]$MACR_CRCE_GRCI = MACR_CRCE(G_est,ng_1$SNPs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   cis_res[[i]]$MACR_CRCE_GRCI = MACR_CRCE(G_est,ng$SNPs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
-  ctwas_res[[i]]$MACR_CRCE_GRCI = MACR_CRCE(G_est,cTWAS,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   cis_eQTLs_res[[i]]$MACR_CRCE_GRCI = MACR_CRCE(G_est,cis_eQTLs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   coloc_ABF_res[[i]]$MACR_CRCE_GRCI = MACR_CRCE(G_est,CL,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   coloc_susie_res[[i]]$MACR_CRCE_GRCI = MACR_CRCE(G_est,CL_susie,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
@@ -345,7 +341,6 @@ for (i in 1:ncv){
   TWRCI_res[[i]]$MACR_CRCE_CC = MACR_CRCE(G_est,aa$SNPs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   locs_res[[i]]$MACR_CRCE_CC = MACR_CRCE(G_est,ng_1$SNPs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   cis_res[[i]]$MACR_CRCE_CC = MACR_CRCE(G_est,ng$SNPs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
-  ctwas_res[[i]]$MACR_CRCE_CC = MACR_CRCE(G_est,cTWAS,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   cis_eQTLs_res[[i]]$MACR_CRCE_CC = MACR_CRCE(G_est,cis_eQTLs,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   coloc_ABF_res[[i]]$MACR_CRCE_CC = MACR_CRCE(G_est,CL,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
   coloc_susie_res[[i]]$MACR_CRCE_CC = MACR_CRCE(G_est,CL_susie,SNP_data_ft,ge_fst,batchest,target_ft,SNP_data_f[folds==i,],ge_f[folds==i,],Bte,target_f[folds==i,])
@@ -422,42 +417,37 @@ for (i in 1:imax){
   res_mat[i,1,1] = TWRCI_res[[i]]$MACR_CRCE
   res_mat[i,2,1] = locs_res[[i]]$MACR_CRCE
   res_mat[i,3,1] = cis_res[[i]]$MACR_CRCE
-  res_mat[i,4,1] = ctwas_res[[i]]$MACR_CRCE
-  res_mat[i,5,1] = cis_eQTLs_res[[i]]$MACR_CRCE
-  res_mat[i,6,1] = coloc_ABF_res[[i]]$MACR_CRCE
-  res_mat[i,7,1] = coloc_susie_res[[i]]$MACR_CRCE
+  res_mat[i,4,1] = cis_eQTLs_res[[i]]$MACR_CRCE
+  res_mat[i,5,1] = coloc_ABF_res[[i]]$MACR_CRCE
+  res_mat[i,6,1] = coloc_susie_res[[i]]$MACR_CRCE
   
   res_mat[i,1,2] = TWRCI_res[[i]]$MACR_CRCE_SIGNET
   res_mat[i,2,2] = locs_res[[i]]$MACR_CRCE_SIGNET
   res_mat[i,3,2] = cis_res[[i]]$MACR_CRCE_SIGNET
-  res_mat[i,4,2] = ctwas_res[[i]]$MACR_CRCE_SIGNET
-  res_mat[i,5,2] = cis_eQTLs_res[[i]]$MACR_CRCE_SIGNET
-  res_mat[i,6,2] = coloc_ABF_res[[i]]$MACR_CRCE_SIGNET
-  res_mat[i,7,2] = coloc_susie_res[[i]]$MACR_CRCE_SIGNET
+  res_mat[i,4,2] = cis_eQTLs_res[[i]]$MACR_CRCE_SIGNET
+  res_mat[i,5,2] = coloc_ABF_res[[i]]$MACR_CRCE_SIGNET
+  res_mat[i,6,2] = coloc_susie_res[[i]]$MACR_CRCE_SIGNET
   
   res_mat[i,1,3] = TWRCI_res[[i]]$MACR_CRCE_RCI
   res_mat[i,2,3] = locs_res[[i]]$MACR_CRCE_RCI
   res_mat[i,3,3] = cis_res[[i]]$MACR_CRCE_RCI
-  res_mat[i,4,3] = ctwas_res[[i]]$MACR_CRCE_RCI
-  res_mat[i,5,3] = cis_eQTLs_res[[i]]$MACR_CRCE_RCI
-  res_mat[i,6,3] = coloc_ABF_res[[i]]$MACR_CRCE_RCI
-  res_mat[i,7,3] = coloc_susie_res[[i]]$MACR_CRCE_RCI
+  res_mat[i,4,3] = cis_eQTLs_res[[i]]$MACR_CRCE_RCI
+  res_mat[i,5,3] = coloc_ABF_res[[i]]$MACR_CRCE_RCI
+  res_mat[i,6,3] = coloc_susie_res[[i]]$MACR_CRCE_RCI
   
   res_mat[i,1,4] = TWRCI_res[[i]]$MACR_CRCE_GRCI
   res_mat[i,2,4] = locs_res[[i]]$MACR_CRCE_GRCI
   res_mat[i,3,4] = cis_res[[i]]$MACR_CRCE_GRCI
-  res_mat[i,4,4] = ctwas_res[[i]]$MACR_CRCE_GRCI
-  res_mat[i,5,4] = cis_eQTLs_res[[i]]$MACR_CRCE_GRCI
-  res_mat[i,6,4] = coloc_ABF_res[[i]]$MACR_CRCE_GRCI
-  res_mat[i,7,4] = coloc_susie_res[[i]]$MACR_CRCE_GRCI
+  res_mat[i,4,4] = cis_eQTLs_res[[i]]$MACR_CRCE_GRCI
+  res_mat[i,5,4] = coloc_ABF_res[[i]]$MACR_CRCE_GRCI
+  res_mat[i,6,4] = coloc_susie_res[[i]]$MACR_CRCE_GRCI
   
   res_mat[i,1,5] = TWRCI_res[[i]]$MACR_CRCE_CC
   res_mat[i,2,5] = locs_res[[i]]$MACR_CRCE_CC
   res_mat[i,3,5] = cis_res[[i]]$MACR_CRCE_CC
-  res_mat[i,4,5] = ctwas_res[[i]]$MACR_CRCE_CC
-  res_mat[i,5,5] = cis_eQTLs_res[[i]]$MACR_CRCE_CC
-  res_mat[i,6,5] = coloc_ABF_res[[i]]$MACR_CRCE_CC
-  res_mat[i,7,5] = coloc_susie_res[[i]]$MACR_CRCE_CC
+  res_mat[i,4,5] = cis_eQTLs_res[[i]]$MACR_CRCE_CC
+  res_mat[i,5,5] = coloc_ABF_res[[i]]$MACR_CRCE_CC
+  res_mat[i,6,5] = coloc_susie_res[[i]]$MACR_CRCE_CC
   
 }
 
