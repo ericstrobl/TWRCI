@@ -71,7 +71,7 @@ for (i in 1:ncv){
   SNP_data_ft = SNP_data_f[folds!=i,]
   target_ft = target_f[folds!=i]
   age_ft = age_f[folds!=i]
-  nuisance_ft = nuisance_fs[folds!=i,]
+  nuisance_ft = nuisance_fs[folds!=i]
   
   # betas
   prod = SNP_data_ft * target_ft
@@ -360,7 +360,7 @@ for (i in 1:ncv){
   coloc_susie_res[[i]]$MACR_silver_CC = MACR_silver(target_f[folds==i],G_est,ge_fs[folds==i,],SNP_data_f[folds==i,],CL_susie,cbind(nuisance_fs,age_f)[folds==i,],desc,ge_f[folds==i,])
   
   
-  save(file="Results_COPD_cv10_again_age_resid2_G_nuisance3.RData", Gs, TWRCI_res, locs_res, cis_res, ctwas_res, cis_eQTLs_res, coloc_ABF_res, coloc_susie_res, 
+  save(file="Results_IHD.RData", Gs, TWRCI_res, locs_res, cis_res, ctwas_res, cis_eQTLs_res, coloc_ABF_res, coloc_susie_res, 
        SIGNET_res, RCI_res, GRCI_res, CausalCell_res)
 }
 
