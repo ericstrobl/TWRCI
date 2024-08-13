@@ -13,15 +13,15 @@ Install time is under 5 minutes for a typical desktop computer.
 
 > BiocManager::install(c("qvalue", "biomaRt", "AnnotationDbi", "org.Hs.eg.db", "gage"))
 
+> install_github("chaim-e/independence")
+
 > library(devtools)
 
 > install_github("ericstrobl/TWRCI")
 
 > library(TWRCI)
 
-Installation of the independence and cTWAS packages are also required if you want to replicate the experiments:
-
-> install_github("chaim-e/independence")
+Installation of the cTWAS package is also required if you want to replicate the experiments:
 
 > install_github("xinhe-lab/ctwas",ref = "main")
 
