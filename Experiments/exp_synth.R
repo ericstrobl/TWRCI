@@ -46,7 +46,7 @@ for (i in 51:100){
   prod = normalizeData(RNAseq$SNP_data) * c(normalizeData(RNAseq$Y))
   SY = colSums(prod)
   corZY = colMeans(prod)
-  corZY_var = apply(prod,2,var)/n
+  corZY_var = apply(prod,2,var)/nsamps
   LD = cor(normalizeData(RNAseq$SNP_data))
   
   
