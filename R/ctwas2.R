@@ -1,4 +1,4 @@
-ctwas <- function(Z,X,Y,cis,batches){
+ctwas2 <- function(Z,X,Y,cis,batches){
 
   require(logging)
   require(ctwas)
