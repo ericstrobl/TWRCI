@@ -11,7 +11,7 @@ Install time is under 5 minutes for a typical desktop computer.
 
 > if (!require("BiocManager", quietly = TRUE)) install.packages("BiocManager")
 
-> BiocManager::install(c("qvalue", "biomaRt", "AnnotationDbi", "org.Hs.eg.db", "gage", "RBGL"))
+> BiocManager::install(c("qvalue", "biomaRt", "AnnotationDbi", "org.Hs.eg.db", "gage", "RBGL", "Rgraphviz"))
 
 Download the [independence 1.0.1](https://cran.r-project.org/src/contrib/Archive/independence/) package from the CRAN archive and install it from source:
 
