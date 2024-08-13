@@ -76,7 +76,7 @@ for (i in 1:ncv){
   prod = SNP_data_ft * target_ft
   SY = colSums(prod)
   corZY = colMeans(prod)
-  corZY_var = apply(prod,2,var)/n
+  corZY_var = apply(prod,2,var)/nrow(SNP_data_ft)
   batches = age_ft
   
   ### annotation
