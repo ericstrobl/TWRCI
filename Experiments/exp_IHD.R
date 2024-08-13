@@ -156,7 +156,7 @@ for (i in 1:ncv){
   
   Xte = SNP_data_f[folds==i,]
   Yte = cbind(ge_fs[folds==i,],target_f[folds==i,])
-  Bte = cbind(nuisance_fs[folds==i,],age_f[folds==i])
+  Bte = cbind(nuisance_fs[folds==i],age_f[folds==i])
   batchest = cbind(nuisance_ft,age_ft)
   
   TWRCI_res[[i]]$MACR_annot_graph = MACR_annot_graph(G_est,aa$SNPs,SNP_data_ft,cbind(ge_fst,target_ft),batchest,Xte,Yte,Bte)
