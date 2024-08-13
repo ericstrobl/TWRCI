@@ -77,7 +77,7 @@ for (i in 51:100){
 
   ### cTWAS
   ptm <- proc.time()
-  cTWAS = ctwas2(RNAseq$SNP_data,RNAseq$X,RNAseq$Y,cis,RNAseq$batch) # directories in this function need to be customized
+  cTWAS = ctwas2(RNAseq$SNP_data,RNAseq$X,RNAseq$Y,cis,RNAseq$batch) # directories in this function need to be customized by following https://xinhe-lab.github.io/ctwas/articles/ctwas_summary_statistics.html
   ctwas_res[[i]]$time = (proc.time() - ptm)[3]
   ctwas_res[[i]]$MCC = MCC_annotations(cTWAS,SNPs$SNPs)
   ctwas_res[[i]]$rank = rank_annot(cTWAS,SNPs$SNPs,RNAseq$SNP_data,cbind(RNAseq$X,RNAseq$Y),G)
