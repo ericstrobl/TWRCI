@@ -17,6 +17,10 @@ Install time is under 5 minutes for a typical desktop computer.
 
 > library(TWRCI)
 
+Installation of the cTWAS package is also required, if you want to replicate the experiments:
+
+> install_github("xinhe-lab/ctwas",ref = "main")
+
 # Run TWRCI on demo data
 Set the number of samples of the variant-expression-phenotype data to 500:
 
