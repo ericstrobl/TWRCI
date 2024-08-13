@@ -77,7 +77,7 @@ for (i in 51:100){
 
   ### cTWAS
   ptm <- proc.time()
-  cTWAS = ctwas(RNAseq$SNP_data,RNAseq$X,RNAseq$Y,cis,RNAseq$batch)
+  cTWAS = ctwas2(RNAseq$SNP_data,RNAseq$X,RNAseq$Y,cis,RNAseq$batch)
   ctwas_res[[i]]$time = (proc.time() - ptm)[3]
   ctwas_res[[i]]$MCC = MCC_annotations(cTWAS,SNPs$SNPs)
   ctwas_res[[i]]$rank = rank_annot(cTWAS,SNPs$SNPs,RNAseq$SNP_data,cbind(RNAseq$X,RNAseq$Y),G)
