@@ -19,7 +19,7 @@ Install time is under 5 minutes for a typical desktop computer.
 
 > library(TWRCI)
 
-Installation of the independence and cTWAS packagees are also required, if you want to replicate the experiments:
+Installation of the independence and cTWAS packages are also required if you want to replicate the experiments:
 
 > install_github("chaim-e/independence")
 
