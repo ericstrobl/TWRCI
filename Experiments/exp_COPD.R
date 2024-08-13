@@ -412,7 +412,7 @@ t(apply(res_mat,c(2,3),mean))-1*t(apply(res_mat,c(2,3),sd))/sqrt(10)
 
 # CRCE
 imax =10
-res_mat = array(0,c(imax,7,5))
+res_mat = array(0,c(imax,6,5))
 for (i in 1:imax){
   res_mat[i,1,1] = TWRCI_res[[i]]$MACR_CRCE
   res_mat[i,2,1] = locs_res[[i]]$MACR_CRCE
