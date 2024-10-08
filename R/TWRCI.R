@@ -114,7 +114,7 @@ FindSink_GS_112 <- function(U,genes_d,SNPs_d,nuisance_d,batches,SNPs){
   ## BASELINE SCORES
   stat = Inf
   for (i in seq_len(r)){
-    PS = Compare_ps_sink_112(U[i],U[-i],betas[,-i,drop=FALSE],lambda,genes_d,SNPs_d,nuisance_d,batches,SNPs)
+    PS = Compare_ps_sink_112(U[i],U[-i],betas[,-i,drop=FALSE],betas[,i,drop=FALSE],lambda,genes_d,SNPs_d,nuisance_d,batches,SNPs)
     
     if (PS$stat <= stat){
       stat = PS$stat
@@ -128,7 +128,7 @@ FindSink_GS_112 <- function(U,genes_d,SNPs_d,nuisance_d,batches,SNPs){
   
 }
 
-Compare_ps_sink_112 <- function(i,not_is,betas,lambda,genes_d,SNPs_d,nuisance_d,batches,SNPs){
+Compare_ps_sink_112 <- function(i,not_is,betas,betas0,lambda,genes_d,SNPs_d,nuisance_d,batches,SNPs){
   n = nrow(genes_d)
   id = setdiff(1:ncol(SNPs_d),unlist(SNPs))
   if (length(id)==0){
@@ -140,7 +140,7 @@ Compare_ps_sink_112 <- function(i,not_is,betas,lambda,genes_d,SNPs_d,nuisance_d,
   
   iSN = c()
   for (s in 1:length(id)){ # find SNPs with largest coefficients
-    if (betas_i[s] > max(betas[s,])){
+    if ((betas_i[s]*betas0[s]) > (max(betas[s,]^2))){
       iSN = c(iSN,id[s])
     }
   }
